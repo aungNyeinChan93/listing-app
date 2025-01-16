@@ -15,10 +15,11 @@
 
                 <div class="md:flex md:items-center md:gap-12">
                     <nav aria-label="Global" class="hidden md:block">
-                        <ul class="flex items-center gap-6 text-sm">
-                            <li>
-                                <a class="text-gray-500 transition hover:text-gray-500/75" href="#"> About </a>
-                            </li>
+                        <ul class="flex items-center gap-6 text-sm" v-if="$page.props.auth.user">
+
+                            <Link :class="{ 'bg-gray-700': $page.component == 'Home/Index' }"
+                                class="text-gray-100 transition hover:bg-gray-500/75 bg-gray-500 px-3 py-2 rounded"
+                                :href="route('home')"> Home </Link>
 
                             <li>
                                 <a class="text-gray-500 transition hover:text-gray-500/75" href="#"> Careers </a>
@@ -43,22 +44,35 @@
                     </nav>
 
                     <div class="flex items-center gap-4">
+
                         <div class="sm:flex sm:gap-4">
-                            <a class="rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow"
-                                href="#">
-                                Login
-                            </a>
+                            <Link :class="{ 'bg-teal-400': $page.component == 'Auth/Login' }"
+                                v-if="!$page.props.auth.user"
+                                class="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-gray-400"
+                                :href="route('login')">
+                            Login
+                            </Link>
 
                             <div class="hidden sm:flex">
-                                <a class="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600"
-                                    href="#">
-                                    Register
-                                </a>
+                                <Link :class="{ 'bg-teal-400': $page.component == 'Auth/Register' }"
+                                    v-if="!$page.props.auth.user"
+                                    class="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-gray-400"
+                                    :href="route('register')">
+                                Register
+                                </Link>
                             </div>
 
                             <div class="hidden sm:flex">
-                                <button @click="switchTheme"
-                                    class="rounded-md bg-gray-100 px-5 py-2.5 text-sm
+                                <Link :class="{ 'bg-teal-400': $page.component == 'Auth/Logout' }"
+                                    v-if="$page.props.auth.user" as="button" method="POST"
+                                    class="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-gray-400"
+                                    :href="route('logout')">
+                                Logout
+                                </Link>
+                            </div>
+
+                            <div class="hidden sm:flex">
+                                <button @click="switchTheme" class="rounded-md bg-gray-100 px-5 py-2.5 text-sm
                                      font-medium text-teal-600 hover:bg-gray-800 hover:outline outline-1 ">
                                     <i class="fa-solid fa-circle-half-stroke"></i>
                                 </button>
@@ -84,5 +98,6 @@
 </template>
 
 <script setup>
-import {switchTheme} from '../../theme'
+import { switchTheme } from '../../theme'
+import { Link } from '@inertiajs/vue3';
 </script>
