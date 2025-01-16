@@ -16,11 +16,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
 
+    {{-- Font Awesome --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+
     @inertiaHead
     @routes
 </head>
 
-<body class=" font-Montserrat">
+<body class=" font-Montserrat text-gray-900 bg-white dark:text-white dark:bg-gray-900">
     @inertia
 </body>
 
