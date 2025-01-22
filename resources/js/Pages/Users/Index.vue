@@ -1,7 +1,7 @@
 <template>
     <Head title="Users" />
     <MyContainer>
-    <UserTable :users="users" routeName="users.show" />
+    <UserTable :users="users" routeName='users.show' />
         <div class="pagination text-end mt-3">
             <Pagination :links="users.links" />
         </div>

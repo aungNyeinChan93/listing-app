@@ -27,7 +27,7 @@ class LoginController extends Controller
 
         if (!auth()->attempt($fields)) {
             return back()->withErrors([
-                'email' => "Your Crendial Wrong!"
+                'email' => "Your Credentials Wrong!"
             ])->onlyInput('email');
         }
 
