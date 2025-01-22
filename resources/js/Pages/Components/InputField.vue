@@ -1,15 +1,15 @@
 <script setup>
 defineProps({
-    type:String
+    type:String,
+    placeholder:String,
+    // error:Object,
 });
 
-defineModel({
-
-});
+const model = defineModel();
 
 </script>
 
 <template>
-    <input :type="type" v-model="form.email" placeholder="Enter Email" class="form-input rounded  w-100">
-    <div v-if="errors.email" class="text-sm p-1 text-red-600">{{ errors.email }}</div>
+    <input :type="type" v-model="model" :placeholder="placeholder" class="form-input rounded w-100">
+    <!-- <div v-if="errors.placeholder" class="text-sm p-1 text-red-600">{{ errors.placeholder }}</div> -->
 </template>
