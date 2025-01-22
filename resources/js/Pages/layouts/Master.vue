@@ -17,13 +17,14 @@
                     <nav aria-label="Global" class="hidden md:block">
                         <ul class="flex items-center gap-6 text-sm" v-if="$page.props.auth.user">
 
-                            <Link :class="{ 'bg-gray-700': $page.component == 'Home/Index' }"
-                                class="text-gray-100 transition hover:bg-gray-500/75 bg-gray-500 px-3 py-2 rounded"
-                                :href="route('home')"> Home </Link>
+                            <Link :class="{ 'bg-gray-700  text-white': $page.component == 'Home/Index' }"
+                                class="text-gray-500 transition px-3 py-2 rounded" :href="route('home')"> Home </Link>
 
-                            <li>
-                                <a class="text-gray-500 transition hover:text-gray-500/75" href="#"> Careers </a>
-                            </li>
+
+                            <Link :class="{ 'bg-gray-700 text-white': $page.component == 'Users/Index' }"
+                                class="text-gray-500 transition px-3 py-2 rounded" :href="route('users.index')">
+                            Users </Link>
+
 
                             <li>
                                 <a class="text-gray-500 transition hover:text-gray-500/75" href="#"> History </a>

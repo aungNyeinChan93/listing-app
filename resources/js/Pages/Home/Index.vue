@@ -11,13 +11,15 @@
                 <button @click="$page.props.flash.message = ''" class="px-2 float-end">X</button>
             </div>
         </div>
-
+        <MyContainer>
+            <h1>sdfasd</h1>
+        </MyContainer>
     </div>
 </template>
 
 <script setup>
 import { usePage } from '@inertiajs/vue3';
-
+import MyContainer from '../Components/MyContainer.vue';
 
 const page = usePage();
 // console.log(page.props);
