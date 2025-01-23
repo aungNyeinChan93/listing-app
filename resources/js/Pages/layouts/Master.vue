@@ -63,34 +63,35 @@
                                 </Link>
                             </div>
 
-                            <div class="hidden sm:flex">
+                            <div v-if="$page.props.auth.user" class="hidden sm:flex">
                                 <Link v-if="$page.props.auth.user" @click="showStatus = !showStatus"
                                     class=" me-2 rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-gray-400"
+                                    :class="{ 'bg-teal-200': showStatus }"
                                     href="">
                                 {{ $page.props.auth.user.name }}
                                 <i class="ms-2 fa-solid fa-chevron-down"></i>
                                 </Link>
 
                                 <!-- dropdown -->
-                                <div v-if="showStatus" class="absolute top-20 right-50 bg-gray-400 rounded-md p-2">
-                                    <ul v-if="showStatus" @click="showStatus = false"
-                                        class=" w-[160px] text-white text-center">
+                                <div v-if="showStatus" class="dropdown absolute top-20 right-50 bg-gray-400 rounded-md p-2" @click.stop>
+                                    <ul class="w-[160px] text-white text-center">
                                         <li class="bg-gray-500 p-2 hover:bg-gray-300">
-                                            <Link v-if="$page.props.auth.user"
-                                                :href="route('home')">
-                                            Dashboard
+                                            <Link v-if="$page.props.auth.user" :href="route('home')">
+                                                Dashboard
                                             </Link>
                                         </li>
                                         <li class="bg-gray-500 p-2 hover:bg-gray-300">
-                                            <Link v-if="$page.props.auth.user" as="button" method="POST"
-                                                :href="route('logout')">
-                                            Logout
+                                            <Link v-if="$page.props.auth.user" :href="route('users.index')">
+                                                Users
+                                            </Link>
+                                        </li>
+                                        <li class="bg-gray-500 p-2 hover:bg-gray-300">
+                                            <Link v-if="$page.props.auth.user" as="button" method="POST" :href="route('logout')">
+                                                Logout
                                             </Link>
                                         </li>
                                     </ul>
                                 </div>
-
-
                                 <!--  -->
                                 <!-- <Link :class="{ 'bg-teal-400': $page.component == 'Auth/Logout' }"
                                     v-if="$page.props.auth.user" as="button" method="POST"
@@ -129,7 +130,8 @@
 <script setup>
 import { switchTheme } from '../../theme'
 import { Link } from '@inertiajs/vue3';
-import { ref } from 'vue';
+import { ref, onMounted, onBeforeUnmount } from 'vue';
 
 const showStatus = ref(false);
+
 </script>
