@@ -1,6 +1,8 @@
 <template>
     <div class="mt-5">
 
+        <Head title="Home"/>
+
         <Link :class="{ 'bg-blue-700': $page.component == 'Home/Index' }" :href="route('home')"
             class="px-4 py-2 rounded bg-blue-400 ">
         Home

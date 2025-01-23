@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
 use GuzzleHttp\Middleware;
@@ -10,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 require_once __DIR__ . '/test.php';
 require_once __DIR__ . '/emailVerification.php';
 require_once __DIR__ . '/passwordReset.php';
+require_once __DIR__ . '/confirmPassword.php';
 
 Route::middleware(['guest'])->group(function () {
 
@@ -22,12 +24,20 @@ Route::middleware(['guest'])->group(function () {
 
 Route::middleware(['auth'])->group(function () {
 
+    // Logout
     Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
+    // Home
     Route::get('/', [HomeController::class, 'index'])->middleware('verified')->name('home');
 
+    // Users
     Route::get('users', [UserController::class, 'index'])->name('users.index');
     Route::get('users/detail/{user}', [UserController::class, 'show'])->name('users.show');
+
+    // Profile
+    Route::get('profile', [ProfileController::class, 'index'])
+        ->middleware(['password.confirm'])->name('profile.index');
+
 });
 
 
