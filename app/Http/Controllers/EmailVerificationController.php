@@ -15,17 +15,17 @@ class EmailVerificationController extends Controller
         ]);
     }
 
-    public function verify(EmailVerificationRequest $request)
-    {
-        $request->fulfill();
-
-        return to_route('home')->with('message', 'Email verified! and Register Success!');
-    }
-
     public function send(Request $request)
     {
         $request->user()->sendEmailVerificationNotification();
 
         return back()->with('message', 'Verification link sent!');
+    }
+
+    public function verify(EmailVerificationRequest $request)
+    {
+        $request->fulfill();
+
+        return to_route('home')->with('message', 'Email verified! and Register Success!');
     }
 }

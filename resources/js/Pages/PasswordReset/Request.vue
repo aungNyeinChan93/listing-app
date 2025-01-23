@@ -10,29 +10,25 @@ defineProps({
 })
 const form = useForm({
     email: '',
-    password: '',
 })
 
-const login = () => {
-    form.post('login', {
+const submit = () => {
+    form.post(route('password.email'), {
         onError: () => form.reset('email'),
     })
 }
-
-
 </script>
 
 <template>
 
-    <Head title="login" />
+    <Head title="Reset Password" />
 
     <div class="wrapper w-full h-screen flex justify-center items-center ">
         <div class="grid grid-cols-12 gap-4">
             <div class="col-span-8 col-start-3 flex justify-center items-center">
-                <form @submit.prevent="login" class="p-8 bg-gray-100 rounded-xl  ">
+                <form @submit.prevent="submit" class="p-8 bg-gray-100 rounded-xl  ">
                     <MyContainer>
-                        <h1 class="text-center text-xl">Login Form</h1>
-                        <FlashMessage :message="status" :flash="$page.props.flash"/>
+                        <h1 class="text-center text-xl">Reset Password</h1>
                     </MyContainer>
 
                     <div class="my-2">
@@ -41,14 +37,7 @@ const login = () => {
                     </div>
 
                     <div class="my-2">
-                        <InputField type="password" placeholder="Enter Password" v-model="form.password" />
-                        <div v-if="errors.password" class="text-sm p-1 text-red-600">{{ errors.password }}</div>
-                    </div>
-
-                    <div class="my-2">
-                        <p class="text-sm text-blue-600 p-2">
-                            <Link :href="route('password.request')">Forget Password</Link>
-                        </p>
+                        <FlashMessage :message="status" :flash="$page.props.flash" />
                     </div>
 
                     <button :disabled="form.processing" type="submit" class="px-4 py-2 rounded bg-red-300 "
@@ -60,4 +49,3 @@ const login = () => {
     </div>
 </template>
 
-<style lang="scss" scoped></style>

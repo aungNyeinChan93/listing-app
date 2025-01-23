@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 
 require_once __DIR__ . '/test.php';
 require_once __DIR__ . '/emailVerification.php';
+require_once __DIR__ . '/passwordReset.php';
 
 Route::middleware(['guest'])->group(function () {
 
