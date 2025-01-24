@@ -38,6 +38,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('profile', [ProfileController::class, 'index'])
         ->middleware(['password.confirm'])->name('profile.index');
 
+    Route::patch('profile', [ProfileController::class, 'update'])->name('profile.update');
+
 });
 
 

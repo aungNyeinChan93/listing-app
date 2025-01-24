@@ -73,7 +73,7 @@
 
                                 <!-- dropdown -->
                                 <div v-if="showStatus"
-                                    class="dropdown absolute top-20 right-50 bg-gray-400 rounded-md p-2" @click.stop>
+                                    class="dropdown absolute top-20 right-50 bg-gray-400 rounded-md p-2 z-10" @click.stop>
                                     <ul class="w-[160px] text-white text-center">
                                         <li class="bg-gray-500 p-2 hover:bg-gray-300">
                                             <Link v-if="$page.props.auth.user" :href="route('profile.index')">

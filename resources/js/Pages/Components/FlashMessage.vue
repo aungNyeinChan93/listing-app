@@ -10,4 +10,5 @@ defineProps({
     message: String,
     flash: Object,
 });
+
 </script>

@@ -11,6 +11,7 @@
             <Pagination :links="users.links" />
         </div>
     </MyContainer>
+
 </template>
 
 <script setup>

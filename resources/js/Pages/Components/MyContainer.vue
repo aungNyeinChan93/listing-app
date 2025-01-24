@@ -10,4 +10,10 @@
 
 </script>
 
-<style lang="scss" scoped></style>
+<style >
+
+input[type] {
+   color: rgb(223, 192, 135);
+}
+
+</style>
