@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
@@ -76,5 +77,21 @@ class ProfileController extends Controller
         $request->user()->save();
 
         return redirect()->route('profile.index')->with('message', 'Password updated successfully');
+    }
+
+    // destroy
+    public function destroy(Request $request)
+    {
+        $request->validate([
+            'password' => ['required', 'string', 'min:8', 'current_password'], // current_password is \Hash::check()
+        ]);
+
+        $user = $request->user();
+
+        $user->delete();
+
+        Auth::logout();
+
+        return to_route('login')->with('message', 'Your account has been deleted');
     }
 }

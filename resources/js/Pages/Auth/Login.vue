@@ -7,6 +7,7 @@ import FlashMessage from '../Components/FlashMessage.vue';
 defineProps({
     errors: Object,
     status: String,
+    flash: Object,
 })
 const form = useForm({
     email: '',
@@ -30,9 +31,12 @@ const login = () => {
         <div class="grid grid-cols-12 gap-4">
             <div class="col-span-8 col-start-3 flex justify-center items-center">
                 <form @submit.prevent="login" class="p-8 bg-gray-100 rounded-xl  ">
+
+
                     <MyContainer>
+                        <FlashMessage :message="status" :flash="$page.props.flash" />
+                        <FlashMessage :message="flash.message" :flash="flash" />
                         <h1 class="text-center text-xl">Login Form</h1>
-                        <FlashMessage :message="status" :flash="$page.props.flash"/>
                     </MyContainer>
 
                     <div class="my-2">

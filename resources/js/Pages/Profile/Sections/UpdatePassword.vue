@@ -2,6 +2,7 @@
     <div>
 
         <Head title="Update Password" />
+
         <MyContainer>
             <h1 class="text-center text-2xl font-bold p-2">Update Password</h1>
             <div class="grid grid-cols-4 gap-4">
@@ -37,6 +38,7 @@
                 </div>
             </div>
         </MyContainer>
+
     </div>
 </template>
 
