@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 use App\Models\Listing;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreListingRequest;
 use App\Http\Requests\UpdateListingRequest;
 
@@ -12,10 +13,13 @@ class ListingController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $listings = Listing::query()
             ->with('user')
+            ->when($request->search, function ($q) use ($request) {
+                $q->whereAny(['title', 'description','tags'], 'like', '%' . $request->search . '%');
+            })
             ->orderBy('created_at', 'desc')
             ->paginate(9);
 

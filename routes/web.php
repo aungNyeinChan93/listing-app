@@ -44,7 +44,7 @@ Route::middleware(['auth'])->group(function () {
 
     // listings
     Route::resource('listings', ListingController::class);
-
+    
 
 });
 

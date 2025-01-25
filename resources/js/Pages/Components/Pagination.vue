@@ -1,6 +1,13 @@
 <template>
-    <Link v-for="link in links" :key="link.label" :href="link.url" v-html="link.label"
-        class="px-2 py-1 rounded-lg bg-gray-400 mx-1" :class="{ 'bg-red-400': link.active }" />
+
+
+        <component :is="link.url ? 'Link' : 'span'" v-for="link in links" :key="link.label" :href="link.url"
+            v-html="link.label" class="px-2 py-1 rounded-lg  mx-1"
+            :class="{ 'bg-red-400': link.active,'bg-gray-200 ':!link.url ,'bg-gray-400':link.url }"
+
+            />
+
+
 </template>
 
 <script setup>
