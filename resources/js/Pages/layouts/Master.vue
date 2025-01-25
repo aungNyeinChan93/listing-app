@@ -25,10 +25,10 @@
                                 class="text-gray-500 transition px-3 py-2 rounded" :href="route('users.index')">
                             Users </Link>
 
+                            <Link :class="{ 'bg-gray-700 text-white': $page.component == 'Listings/Index' }"
+                                class="text-gray-500 transition px-3 py-2 rounded" :href="route('listings.index')">
+                            Lisiting </Link>
 
-                            <li>
-                                <a class="text-gray-500 transition hover:text-gray-500/75" href="#"> History </a>
-                            </li>
 
                             <li>
                                 <a class="text-gray-500 transition hover:text-gray-500/75" href="#"> Services </a>
@@ -88,6 +88,11 @@
                                         <li class="bg-gray-500 p-2 hover:bg-gray-300">
                                             <Link v-if="$page.props.auth.user" :href="route('users.index')">
                                             Users
+                                            </Link>
+                                        </li>
+                                        <li class="bg-gray-500 p-2 hover:bg-gray-300">
+                                            <Link v-if="$page.props.auth.user" :href="route('listings.index')">
+                                            Listing
                                             </Link>
                                         </li>
                                         <li class="bg-gray-500 p-2 hover:bg-gray-300">
