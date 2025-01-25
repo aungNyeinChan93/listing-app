@@ -14,7 +14,14 @@ class ListingController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Listings/Index');
+        $listings = Listing::query()
+            ->with('user')
+            ->orderBy('created_at', 'desc')
+            ->paginate(9);
+
+        return Inertia::render('Listings/Index', [
+            'listings' => $listings
+        ]);
     }
 
     /**
@@ -38,7 +45,11 @@ class ListingController extends Controller
      */
     public function show(Listing $listing)
     {
-        //
+        $listing->load('user'); // Load the user relation
+
+        return Inertia::render('Listings/Show', [
+            'listing' => $listing
+        ]);
     }
 
     /**

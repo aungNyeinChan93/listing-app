@@ -42,7 +42,6 @@ Route::middleware(['auth'])->group(function () {
     Route::put('profile/password', [ProfileController::class, 'passwordUpdate'])->name('profilePassword.update');
     Route::delete('profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-
     // listings
     Route::resource('listings', ListingController::class);
 
