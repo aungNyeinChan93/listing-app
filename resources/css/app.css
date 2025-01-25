@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+@layer components{
+    .btn-primary{
+        @apply px-4 py-2 rounded me-1 bg-blue-500 hover:bg-blue-300 text-white
+    }
+
+    .btn-danger{
+        @apply px-4 py-2 rounded me-1 bg-red-500 hover:bg-red-300 text-white
+    }
+
+    .badge{
+        @apply px-2 py-1 rounded-xl bg-gray-300 hover:bg-gray-400
+    }
+}

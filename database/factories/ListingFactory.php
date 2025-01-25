@@ -21,7 +21,7 @@ class ListingFactory extends Factory
             'user_id'=>User::factory(),
             'title'=>fake()->sentence(),
             'description'=>fake()->paragraph(),
-            'tags'=>fake()->randomElement(['php','javascript','vue','react','angular']),
+            'tags'=>fake()->randomElement(['php,java','javascript,ruby','vue,react','react,angula','angular,vue']),
             'email'=>fake()->email(),
             'link'=>fake()->url(),
             'image'=>fake()->imageUrl(),

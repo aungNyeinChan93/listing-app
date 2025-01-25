@@ -31,7 +31,7 @@ const model=defineModel();
 </script>
 
 <style scoped>
-    input[type="text"] {
+    input[type] {
       color: black;
     }
 </style>

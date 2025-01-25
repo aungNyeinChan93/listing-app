@@ -14,15 +14,23 @@
 
                         <div>
                             <p class="mt-0.5 text-lg font-medium text-gray-900 hover:text-red-400">
-                                <Link :href="route(routeName,list.id)" >{{ list.title }}</Link>
+                                <Link :href="route(routeName, list.id)">{{ list.title }}</Link>
                             </p>
                             <p class="text-green-500 text-sm">{{ list.user.name }}</p>
                         </div>
                     </div>
 
-                    <p class="mt-4 text-gray-700">
-                        {{ list.description.substring(0, 100) }}
+                    <!-- tags -->
+                    <div v-if="list.tags" class="flex justify-start space-x-3 items-center py-2 mt-2 ">
+                        <div class="badge"
+                            v-for="tag in list.tags.split(',')" :key="tag">{{ tag }}</div>
+                    </div>
+
+                    <!-- desc -->
+                    <p class="mt-2 text-gray-700 ">
+                        {{ list.description.substring(0, 100)+ " . . . " }}
                     </p>
+
                 </blockquote>
             </div>
         </div>

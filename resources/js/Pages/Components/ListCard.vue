@@ -31,16 +31,14 @@
             </div>
 
             <div class="grid grid-cols-1 gap-1 p-3 even:bg-gray-50 sm:grid-cols-3 sm:gap-4">
-                <dt class="font-medium text-gray-900">Date</dt>
+                <dt class="font-medium text-gray-900">Listed</dt>
                 <dd class="text-gray-700 sm:col-span-2">
                     {{ new Date(listing.created_at).toLocaleDateString('en-GB') }}
                 </dd>
             </div>
         </dl>
     </div>
-    <div class="mt-4 p-1">
-        <Link :href="route(routeName)">Back</Link>
-    </div>
+
 </template>
 
 <script setup>
@@ -50,10 +48,10 @@ defineProps({
         type: Object,
         required: true,
     },
-    routeName: {
-        type: String,
-        required: true,
-    },
+    // routeName: {
+    //     type: String,
+    //     required: true,
+    // },
 });
 
 </script>
