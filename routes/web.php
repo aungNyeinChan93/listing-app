@@ -39,6 +39,7 @@ Route::middleware(['auth'])->group(function () {
         ->middleware(['password.confirm'])->name('profile.index');
 
     Route::patch('profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::put('profile/password', [ProfileController::class, 'passwordUpdate'])->name('profilePassword.update');
 
 });
 

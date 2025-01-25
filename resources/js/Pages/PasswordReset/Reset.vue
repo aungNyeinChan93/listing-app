@@ -50,7 +50,7 @@ const register = () => {
                         <div v-if="errors.password_confirmation" class="text-sm p-1 text-red-600">{{
                             errors.password_confirmation }}</div>
                     </div>
-                    <button :disabled="form.processing" type="submit" class="px-4 py-2 rounded bg-gray-300 "
+                    <button :disabled="form.processing" type="submit" class="px-4 py-2 rounded bg-gray-500 "
                         :class="{ 'bg-gray-100': form.processing }"><span v-if="form.processing">Update ... </span>
                         <span v-else>Update</span></button>
                 </form>

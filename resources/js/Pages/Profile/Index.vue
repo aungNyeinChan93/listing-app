@@ -1,22 +1,22 @@
 <template>
-    <Head title="Profile"/>
+
+    <Head title="Profile" />
     <div class="profile-index">
-        <FlashMessage :message="success" :flash="flash" />
-        <Update :user="user"/>
+        <FlashMessage :message="flash.message" :flash="flash" />
+        <UpdateProfile :user="user" :flash="flash" />
+        <UpdatePassword />
     </div>
 </template>
 
 <script setup>
-import Update from './Sections/update.vue';
+import UpdateProfile from './Sections/UpdateProfile.vue';
+import UpdatePassword from './Sections/UpdatePassword.vue';
 import FlashMessage from '../Components/FlashMessage.vue';
 
 const props = defineProps({
     user: Object,
-    success:String,
-    flash:Object
+    flash: Object
 });
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
