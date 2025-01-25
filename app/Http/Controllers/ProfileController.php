@@ -60,10 +60,14 @@ class ProfileController extends Controller
             'password_confirmation' => 'required|string|min:8|same:password',
         ]);
 
-        if (!Hash::check($fields['current_password'], $request->user()->password)) {
+        if (
+            !Hash::check($fields['current_password'], $request->user()->password)
+            || $request->current_password === $request->password
+        ) {
             return back()->withErrors(
                 [
-                    'current_password' => 'The provided password does not match your current password'
+                    'current_password' => 'The provided password does not match your current password
+                    or the new password is the same as the current password',
                 ]
             )->onlyInput('current_password');
         }

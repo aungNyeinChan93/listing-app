@@ -3,7 +3,7 @@
 
         <Head title="Profile Update" />
         <MyContainer class="my-4">
-            <h1 class="text-center p-2"> Update Profile</h1>
+            <h1 class="text-center p-2 text-2xl font-bold p-2"> Update Profile</h1>
             <div class="grid grid-cols-4 gap-4">
                 <div class="col-span-2 col-start-2">
 
