@@ -19,17 +19,21 @@ class Listing extends Model
 
     public function scopeFilter($query, array $filters)
     {
-        // dd($filters['user_id']);
-        if($filters['user_id'] ?? false){
-            return $query->where('user_id',request('user_id'));
+        if ($filters['user_id'] ?? false) {
+            return $query->where('user_id', request('user_id'));
+        }
+        if ($filters['tag'] ?? false) {
+            return $query->where('tags', 'like', '%' . $filters['tag'] . '%');
         }
     }
 
-    public function scopeTest($query, $filter)
+    public function scopeTest($query, $filters)
     {
-        if ($filter === 'test') {
-            return $query->where('id',10);
+        if ($filters === 'test') {
+            return $query->where('id', 10);
         }
+
+
     }
 }
 

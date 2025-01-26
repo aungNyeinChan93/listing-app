@@ -21,7 +21,8 @@
 
                     <!-- tags -->
                     <div v-if="list.tags" class="flex justify-start space-x-3 items-center py-2 mt-2 ">
-                        <div class="badge" v-for="tag in list.tags.split(',')" :key="tag">{{ tag }}</div>
+                        <div @click="tagFilter(tag)" class="badge" v-for="tag in list.tags.split(',')" :key="tag">{{ tag
+                            }}</div>
                     </div>
 
                     <!-- desc -->
@@ -51,10 +52,16 @@ defineProps({
     },
 });
 
+const params = route().params;
+
 const userFilter = (id) => {
-    router.get(route('listings.index'), { user_id: id }, {
-        preserveState: true,
+    router.get(route('listings.index'), { user_id: id, search: params.search, tag: params.tag }, {
+        // preserveState: true,
     })
+}
+
+const tagFilter = (tag) => {
+    router.get(route('listings.index'), { tag: tag, user_id: params.user_id, search: params.search })
 }
 
 </script>

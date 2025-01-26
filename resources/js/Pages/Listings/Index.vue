@@ -5,11 +5,12 @@
         <MyContainer>
             <div class="grid gap-4">
                 <h2 class="text-center text-2xl font-bold tracking-tight text-white dark:text-gray-600 sm:text-4xl">
-                   Listing
+                    Listing
                 </h2>
 
                 <div>
-                    <SearchInput label="search" placeholder="search" type="text" :action="submit" v-model="form.search"/>
+                    <SearchInput label="search" placeholder="search" type="text" :action="submit"
+                        v-model="form.search" />
                 </div>
 
                 <div v-if="Object.keys(listings.data).length">
@@ -40,32 +41,31 @@ import { throttle } from 'lodash';
 import { watch } from "vue";
 
 
-
 const props = defineProps({
     listings: {
         type: Object,
         required: true,
     },
-    search:String
+    search: String
 });
+
+const params = route().params;
 
 const form = useForm({
-    search:props.search ,
+    search: props.search,
 });
 
-watch(form,throttle(({search})=>{
-    router.get(route('listings.index'),{search:search},{
-        preserveState:true
+watch(form, throttle(({ search }) => {
+    router.get(route('listings.index'), { search: search, user_id: params.user_id, tag: params.tag }, {
+        // preserveState:true
     })
-},500));
+}, 500));
 
-const submit = ()=>{
-    form.get(route('listings.index',{
-        preserveState:true,
+const submit = () => {
+    form.get(route('listings.index', {
+        preserveState: true,
     }))
 }
-
-
 
 </script>
 

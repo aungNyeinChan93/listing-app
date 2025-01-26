@@ -17,7 +17,7 @@ class ListingController extends Controller
     {
         $listings = Listing::query()
             ->with('user')
-            ->filter(request(['user_id']))
+            ->filter(request(['user_id','tag']))
             ->when($request->search, function ($q) use ($request) {
                 $q->whereAny(['title', 'description', 'tags'], 'like', '%' . $request->search . '%');
             })
