@@ -30,7 +30,7 @@ class Listing extends Model
     public function scopeTest($query, $filters)
     {
         if ($filters === 'test') {
-            return $query->where('id', 10);
+             dd($query->with('user')->find(11)->user);
         }
 
 

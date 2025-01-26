@@ -5,10 +5,11 @@
         <MyContainer>
             <div class="grid gap-4">
                 <h2 class="text-center text-2xl font-bold tracking-tight text-white dark:text-gray-600 sm:text-4xl">
-                    Listing
+                    Listing <span class="text-red-600 text-lg">( {{ listings.total }} )</span>
                 </h2>
 
-                <div>
+                <div class="flex space-x-2 justify-end">
+                    <button   class="btn-primary">Approved</button>
                     <SearchInput label="search" placeholder="search" type="text" :action="submit"
                         v-model="form.search" />
                 </div>
@@ -59,7 +60,7 @@ watch(form, throttle(({ search }) => {
     router.get(route('listings.index'), { search: search, user_id: params.user_id, tag: params.tag }, {
         // preserveState:true
     })
-}, 500));
+}, 200));
 
 const submit = () => {
     form.get(route('listings.index', {

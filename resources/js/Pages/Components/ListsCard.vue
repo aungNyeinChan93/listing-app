@@ -41,7 +41,6 @@ import { defineProps } from 'vue';
 import { Link, router } from '@inertiajs/vue3';
 
 defineProps({
-
     listings: {
         type: Object,
         required: true,
