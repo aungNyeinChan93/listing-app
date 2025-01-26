@@ -8,11 +8,26 @@
                     Listing <span class="text-red-600 text-lg">( {{ listings.total }} )</span>
                 </h2>
 
-                <div class="flex space-x-2 justify-end">
-                    <button   class="btn-primary">Approved</button>
-                    <SearchInput label="search" placeholder="search" type="text" :action="submit"
-                        v-model="form.search" />
+                <div class="flex justify-between items-center">
+                    <div class=" space-x-2">
+                        <Link v-if="params.tag" class="badge" :href="route('listings.index', { ...params, tag: null })">
+                        {{
+                            params.tag }} <i class="fa-solid fa-xmark ms-1 text-sm"></i></Link>
+                        <Link v-if="params.search" class="badge"
+                            :href="route('listings.index', { ...params, search: null })"> {{
+                                params.search }} <i class="fa-solid fa-xmark ms-1 text-sm"></i></Link>
+                        <Link v-if="params.user_id" class="badge"
+                            :href="route('listings.index', { ...params, user_id: null })"> {{
+                                userName }} <i class="fa-solid fa-xmark ms-1 text-sm"></i></Link>
+                    </div>
+
+                    <div class="flex space-x-2 justify-end">
+                        <button class="btn-primary">Approved</button>
+                        <SearchInput label="search" placeholder="search" type="text" :action="submit"
+                            v-model="form.search" />
+                    </div>
                 </div>
+
 
                 <div v-if="Object.keys(listings.data).length">
                     <ListsCard :listings="listings" routeName="listings.show" />
@@ -33,6 +48,7 @@
 </template>
 
 <script setup>
+
 import MyContainer from "../Components/MyContainer.vue";
 import ListsCard from "../Components/ListsCard.vue";
 import Pagination from "../Components/Pagination.vue";
@@ -67,6 +83,8 @@ const submit = () => {
         preserveState: true,
     }))
 }
+
+const userName = params.user_id ? props.listings.data.find(list => list.user_id === Number(params.user_id)).user.name : null;
 
 </script>
 
