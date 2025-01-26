@@ -27,7 +27,7 @@ class ListingController extends Controller
                 $q->whereAny(['title', 'description', 'tags'], 'like', '%' . $request->search . '%');
             })
             ->orderBy('created_at', 'desc')
-            ->paginate(9)
+            ->paginate(6)
             ->withQueryString();
 
         return Inertia::render('Listings/Index', [
@@ -41,7 +41,7 @@ class ListingController extends Controller
      */
     public function create()
     {
-        //
+        dd('hit');
     }
 
     /**
@@ -96,5 +96,15 @@ class ListingController extends Controller
             ->test('test')
             ->get();
         return $listings;
+    }
+
+    // non_approved
+    public function non_approved(Request $request)
+    {
+        $listings = Listing::query()->with('user')
+            ->where('approved', false)->paginate(6)->withQueryString();
+        return inertia('Listings/NonApprovedList',[
+            'listings'=>$listings,
+        ]);
     }
 }

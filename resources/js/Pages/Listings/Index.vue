@@ -5,24 +5,29 @@
         <MyContainer>
             <div class="grid gap-4">
                 <h2 class="text-center text-2xl font-bold tracking-tight text-white dark:text-gray-600 sm:text-4xl">
-                    Listing <span class="text-red-600 text-lg">( {{ listings.total }} )</span>
+                    Listing <span class="text-red-600 text-lg">( {{ listings.total || Object.keys(listings.data).length }} )</span>
                 </h2>
 
-                <div class="flex justify-between items-center">
-                    <div class=" space-x-2">
+                <div class="flex justify-between items-center px-1">
+                    <div class="space-x-2">
                         <Link v-if="params.tag" class="badge" :href="route('listings.index', { ...params, tag: null })">
                         {{
                             params.tag }} <i class="fa-solid fa-xmark ms-1 text-sm"></i></Link>
+
                         <Link v-if="params.search" class="badge"
                             :href="route('listings.index', { ...params, search: null })"> {{
                                 params.search }} <i class="fa-solid fa-xmark ms-1 text-sm"></i></Link>
+
                         <Link v-if="params.user_id" class="badge"
                             :href="route('listings.index', { ...params, user_id: null })"> {{
                                 userName }} <i class="fa-solid fa-xmark ms-1 text-sm"></i></Link>
                     </div>
 
-                    <div class="flex space-x-2 justify-end">
-                        <button class="btn-primary">Approved</button>
+                    <div class="flex space-x-3 justify-end">
+                        <Link :href="route('listings.create')" class="flex items-center">
+                            <i class="fa-solid fa-plus border border-blue-600 p-2 rounded-full "></i>
+                        </Link>
+                        <Link as="button" :href="route('listings.non-approved')" class="btn-primary">Pending</Link>
                         <SearchInput label="search" placeholder="search" type="text" :action="submit"
                             v-model="form.search" />
                     </div>

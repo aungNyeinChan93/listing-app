@@ -44,6 +44,7 @@ Route::middleware(['auth'])->group(function () {
 
     // listings
     Route::get('listings/testing',[ListingController::class,'test']);
+    Route::get('listings/non-approved',[ListingController::class,'non_approved'])->name('listings.non-approved');
     Route::resource('listings', ListingController::class);
 
 });

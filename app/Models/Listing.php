@@ -25,12 +25,13 @@ class Listing extends Model
         if ($filters['tag'] ?? false) {
             return $query->where('tags', 'like', '%' . $filters['tag'] . '%');
         }
+        // return ($filters['test']?? false ) ?  'test' : false;
     }
 
     public function scopeTest($query, $filters)
     {
         if ($filters === 'test') {
-             dd($query->with('user')->find(11)->user);
+            dd($query->with('user')->find(11)->user);
         }
 
 
