@@ -43,8 +43,8 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // listings
+    Route::get('listings/testing',[ListingController::class,'test']);
     Route::resource('listings', ListingController::class);
-    
 
 });
 

@@ -17,8 +17,9 @@ class ListingController extends Controller
     {
         $listings = Listing::query()
             ->with('user')
+            ->filter(request(['user_id']))
             ->when($request->search, function ($q) use ($request) {
-                $q->whereAny(['title', 'description','tags'], 'like', '%' . $request->search . '%');
+                $q->whereAny(['title', 'description', 'tags'], 'like', '%' . $request->search . '%');
             })
             ->orderBy('created_at', 'desc')
             ->paginate(9)
@@ -26,7 +27,7 @@ class ListingController extends Controller
 
         return Inertia::render('Listings/Index', [
             'listings' => $listings,
-            'search'=>$request->search
+            'search' => $request->search
         ]);
     }
 
@@ -80,5 +81,14 @@ class ListingController extends Controller
     public function destroy(Listing $listing)
     {
         //
+    }
+
+    // test
+    public function test(){
+
+        $listings= Listing::with('user')
+        ->test('test')
+        ->get();
+        return $listings;
     }
 }
