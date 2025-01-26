@@ -41,7 +41,7 @@ class ListingController extends Controller
      */
     public function create()
     {
-        dd('hit');
+        return Inertia::render('Listings/Create');
     }
 
     /**

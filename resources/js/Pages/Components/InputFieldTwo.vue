@@ -8,7 +8,7 @@
 
             <span
                 class="absolute start-3 top-3 -translate-y-1/2 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-3 peer-focus:text-xs">
-                {{ label }}
+                {{ placeholder }}
             </span>
         </label>
     </div>
