@@ -18,11 +18,12 @@ class UserController extends Controller
                 $query->whereAny(['name', 'email'], 'like', "%{$request->search}%");
             })
             ->orderBy('id', 'desc')
-            ->paginate(10);
+            ->paginate(10)->withQueryString();
 
 
         return Inertia::render('Users/Index', [
             'users' => $users,
+            'search' => $request->search
         ]);
     }
 

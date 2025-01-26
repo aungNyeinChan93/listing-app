@@ -21,10 +21,12 @@ class ListingController extends Controller
                 $q->whereAny(['title', 'description','tags'], 'like', '%' . $request->search . '%');
             })
             ->orderBy('created_at', 'desc')
-            ->paginate(9);
+            ->paginate(9)
+            ->withQueryString();
 
         return Inertia::render('Listings/Index', [
-            'listings' => $listings
+            'listings' => $listings,
+            'search'=>$request->search
         ]);
     }
 

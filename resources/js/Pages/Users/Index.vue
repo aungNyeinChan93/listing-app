@@ -27,11 +27,11 @@ const props = defineProps({
     users: {
         type: Object,
         required: true,
-
-    }
+    },
+    search:String,
 });
 
-const search = ref('');
+const search = ref(props.search);
 
 const action = () => {
     router.get('/users', { search: search.value }, { preserveState: true });

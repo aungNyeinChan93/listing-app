@@ -35,7 +35,7 @@ import MyContainer from "../Components/MyContainer.vue";
 import ListsCard from "../Components/ListsCard.vue";
 import Pagination from "../Components/Pagination.vue";
 import SearchInput from '../Components/SearchInput.vue'
-import { useForm } from "@inertiajs/vue3";
+import { router, useForm } from "@inertiajs/vue3";
 import { throttle } from 'lodash';
 import { watch } from "vue";
 
@@ -46,19 +46,18 @@ const props = defineProps({
         type: Object,
         required: true,
     },
+    search:String
 });
 
 const form = useForm({
-    search:'',
+    search:props.search ,
 });
 
 watch(form,throttle(({search})=>{
-    form.get(route('listings.index'),{
-        preserveState:true,
-        preserveScroll:true,
-        // onSuccess:()=>
+    router.get(route('listings.index'),{search:search},{
+        preserveState:true
     })
-},1000));
+},500));
 
 const submit = ()=>{
     form.get(route('listings.index',{
