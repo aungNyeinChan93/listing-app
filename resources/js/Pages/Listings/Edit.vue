@@ -17,7 +17,7 @@
                         </div>
                     </div>
 
-                    <form @submit.prevent="update" class="grid grid-cols-2 gap-x-4 ">
+                    <form  @submit.prevent="update" class="grid grid-cols-2 gap-x-4 ">
                         <div class="">
                             <InputFieldTwo label="title" placeholder="title" type="text" v-model="form.title" />
                             <InputFieldTwo label="tags" placeholder="tags  (seperate with comma eg 1,2,3)" type="text"
@@ -68,11 +68,12 @@ const form = useForm({
     email: props.listing.email,
     tags: props.listing.tags,
     link: props.listing.link,
-    image: props.listing.image,
+    image: null,
+    _method:'PATCH'
 });
 
 const update = () => {
-    form.patch(route('listings.update',props.listing.id), {
+    form.post(route('listings.update',props.listing.id), {
         // preserveState: true,
         // onError: () => form.reset(),
     });

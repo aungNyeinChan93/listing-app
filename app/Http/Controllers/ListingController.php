@@ -6,6 +6,7 @@ use Inertia\Inertia;
 use App\Models\Listing;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
+use Storage;
 
 class ListingController extends Controller
 {
@@ -105,7 +106,32 @@ class ListingController extends Controller
      */
     public function update(Request $request, Listing $listing)
     {
-        dd($request->all());
+        $fields = $request->validate([
+            'title' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string'],
+            'email' => ['nullable', 'email'],
+            'link' => ['nullable', 'url'],
+            'tags' => ['nullable', 'string'],
+            'image' => ['nullable', 'file', 'image', 'mimes:jpeg,png,jpg,gif', 'max:4000']
+        ]);
+
+        if ($request->hasFile(('image'))) {
+
+            if ($listing->image) {
+                Storage::disk('public')->delete($listing->image);  //oldImage delete ifhas?
+            }
+            $fields['image'] = $request->file('image')->store('/images/listings/', 'public');
+        } else {
+
+            $fields['image'] = $listing->image;
+        }
+
+        $tags = implode(',', array_unique(array_filter(array_map('trim', explode(',', $request->tags)))));
+        $fields['tags'] = $tags;
+
+        $listing->update($fields);
+
+        return to_route('listings.index')->with('message', 'Listing Update Success!');
     }
 
     /**
