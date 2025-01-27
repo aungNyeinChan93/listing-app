@@ -6,8 +6,6 @@ use Inertia\Inertia;
 use App\Models\Listing;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
-use App\Http\Requests\StoreListingRequest;
-use App\Http\Requests\UpdateListingRequest;
 
 class ListingController extends Controller
 {
@@ -47,9 +45,36 @@ class ListingController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreListingRequest $request)
+    public function store(Request $request)
     {
-        //
+        // $tags = $request->tags;
+        // $tags = explode(',', $tags);
+        // $tags = array_map('trim', $tags);
+        // $tags = array_filter($tags);
+        // $tags = array_unique($tags);
+        // $tags = implode(',', $tags);
+
+        $tags = implode(',', array_unique(array_filter(array_map('trim', explode(',', $request->tags)))));
+
+        $fields = $request->validate([
+            'title' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string'],
+            'email' => ['nullable', 'email'],
+            'link' => ['nullable', 'url'],
+            'tags' => ['nullable', 'string'],
+            'image' => ['nullable', 'file', 'image', 'mimes:jpeg,png,jpg,gif', 'max:4000']
+        ]);
+
+        if ($request->hasFile(('image'))) {
+            $fields['image'] = $request->file('image')->store('/images/listings/', 'public');
+        }
+
+        $fields['tags'] = $tags;
+
+        $request->user()->listings()->create($fields);
+
+        return to_route('listings.index')->with('message','Listing create Success!');
+
     }
 
     /**
@@ -75,7 +100,7 @@ class ListingController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateListingRequest $request, Listing $listing)
+    public function update(Request $request, Listing $listing)
     {
         //
     }
@@ -103,8 +128,8 @@ class ListingController extends Controller
     {
         $listings = Listing::query()->with('user')
             ->where('approved', false)->paginate(6)->withQueryString();
-        return inertia('Listings/NonApprovedList',[
-            'listings'=>$listings,
+        return inertia('Listings/NonApprovedList', [
+            'listings' => $listings,
         ]);
     }
 }

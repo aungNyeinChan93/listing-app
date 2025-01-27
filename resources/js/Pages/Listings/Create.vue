@@ -1,14 +1,21 @@
 <template>
     <div>
+
         <Head title="Listing Create" />
         <MyContainer>
             <h3 class="text-2xl text-center p-2 font-bold">Listing Create</h3>
             <div class="grid grid-cols-6 gap-4">
                 <div class="col-span-4 col-start-2">
+
+                    <div v-show="form.errors">
+                        <ul>
+                           <li v-for="error in form.errors" :key="error" class="text-sm text-red-400 ">{{ error }}</li>
+                        </ul>
+                    </div>
                     <form @submit.prevent="create" class="grid grid-cols-2 gap-x-4 ">
                         <div class="">
                             <InputFieldTwo label="title" placeholder="title" type="text" v-model="form.title" />
-                            <InputFieldTwo label="tags" placeholder="tags (seperate with comma eg 1,2,3)" type="text"
+                            <InputFieldTwo label="tags" placeholder="tags  (seperate with comma eg 1,2,3)" type="text"
                                 v-model="form.tags" />
                         </div>
                         <div class="">
@@ -52,9 +59,11 @@ const form = useForm({
     image: null,
 });
 
-const create =()=>{
-    console.log(form);
-
+const create = () => {
+    form.post(route('listings.store'), {
+        preserveState: true,
+        // onError: () => form.reset(),
+    });
 }
 
 </script>

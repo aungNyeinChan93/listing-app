@@ -7,8 +7,8 @@
                     class="rounded-lg bg-gray-50 p-6 shadow-sm sm:p-8">
                     <div class="flex items-center gap-4">
                         <img alt=""
-                            :src="'https://images.unsplash.com/photo-1595152772835-219674b2a8a6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80'"
-                            class="size-14 rounded-full object-cover" />
+                            :src="list.image ? `/storage/${list.image}` :`/storage/images/listings/test.png`"
+                            class="!size-14 rounded-full object-contain object-center " />
 
                         <div>
                             <p class="mt-0.5 text-lg font-medium text-gray-900 hover:text-red-400">
@@ -18,6 +18,7 @@
                                 list.user.name }}</p>
                         </div>
                     </div>
+
 
                     <!-- tags -->
                     <div v-if="list.tags" class="flex justify-start space-x-3 items-center py-2 mt-2 ">

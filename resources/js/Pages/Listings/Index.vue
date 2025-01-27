@@ -4,9 +4,14 @@
     <div>
         <MyContainer>
             <div class="grid gap-4">
+                <div v-if="flash">
+                    <FlashMEssage :message="flash.message" :flash="flash"/>
+                </div>
+
                 <h2 class="text-center text-2xl font-bold tracking-tight text-white dark:text-gray-600 sm:text-4xl">
                     Listing <span class="text-red-600 text-lg">( {{ listings.total || Object.keys(listings.data).length }} )</span>
                 </h2>
+
 
                 <div class="flex justify-between items-center px-1">
                     <div class="space-x-2">
@@ -61,14 +66,15 @@ import SearchInput from '../Components/SearchInput.vue'
 import { router, useForm } from "@inertiajs/vue3";
 import { throttle } from 'lodash';
 import { watch } from "vue";
-
+import FlashMEssage from '../Components/FlashMessage.vue'
 
 const props = defineProps({
     listings: {
         type: Object,
         required: true,
     },
-    search: String
+    search: String,
+    flash:Object,
 });
 
 const params = route().params;
