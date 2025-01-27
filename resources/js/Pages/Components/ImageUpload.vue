@@ -45,5 +45,6 @@ const undoStatus = ref(false);
 const undoImage = (e) => {
     imagePreview.value = currentImage
     undoStatus.value = false
+    emit('image',{image:null})
 }
 </script>

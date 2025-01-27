@@ -16,10 +16,13 @@
             <div class="mt-4 p-1">
                 <Link :href="route('listings.index')" class="btn-primary">Back</Link>
                 <Link :href="route('listings.edit',listing.id)" class="btn-primary !bg-yellow-400">Edit</Link>
-                <Link :href="route('listings.index')" class="btn-primary !bg-red-400">Delete</Link>
+                <Link v-show="user.id == listing.user_id" as="button" method="delete" :href="route('listings.destroy',listing.id)" class="btn-primary !bg-red-400">Delete</Link>
             </div>
+
+            <!-- for debug -->
             <pre>
                 <!-- {{ listing }} -->
+                  <!-- {{ user }} -->
             </pre>
         </MyContainer>
 
@@ -29,6 +32,8 @@
 <script setup>
 import MyContainer from '../Components/MyContainer.vue';
 import ListCard from '../Components/ListCard.vue';
+import { computed } from 'vue';
+import { usePage } from '@inertiajs/vue3';
 
 defineProps({
     listing: {
@@ -36,6 +41,9 @@ defineProps({
         required: true,
     },
 });
+
+const page = usePage();
+const user = computed(()=>page.props.auth.user)
 
 
 </script>

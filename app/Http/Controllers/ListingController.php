@@ -139,7 +139,11 @@ class ListingController extends Controller
      */
     public function destroy(Listing $listing)
     {
-        //
+        if(isset($listing->image)){
+            Storage::disk('public')->delete($listing->image);
+        }
+        $listing->delete();
+        return to_route('listings.index')->with('message','Listing delete Success!');
     }
 
     // test
