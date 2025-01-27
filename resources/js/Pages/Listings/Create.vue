@@ -7,11 +7,16 @@
             <div class="grid grid-cols-6 gap-4">
                 <div class="col-span-4 col-start-2">
 
-                    <div v-show="form.errors">
-                        <ul>
-                           <li v-for="error in form.errors" :key="error" class="text-sm text-red-400 ">{{ error }}</li>
+                    <!-- error message -->
+                    <div v-if="Object.keys(form.errors).length " class="flex justify-between p-2 bg-red-100/50 rounded-lg">
+                        <ul >
+                           <li v-for="error in form.errors" :key="error" class="text-sm text-red-400 p-1 ">{{ error }}</li>
                         </ul>
+                        <div>
+                            <button @click="()=> form.errors = ''">X</button>
+                        </div>
                     </div>
+
                     <form @submit.prevent="create" class="grid grid-cols-2 gap-x-4 ">
                         <div class="">
                             <InputFieldTwo label="title" placeholder="title" type="text" v-model="form.title" />
@@ -30,6 +35,7 @@
                         </div>
                         <div class="mt-2">
                             <button type="submit" class="btn-primary">Create</button>
+                            <Link as="button" :href="route('listings.index')" class="btn-primary !bg-gray-400"> Back</Link>
                         </div>
                     </form>
                 </div>

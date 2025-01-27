@@ -55,7 +55,7 @@ defineProps({
 const params = route().params;
 
 const userFilter = (id) => {
-    router.get(route('listings.index'), { user_id: id, search: params.search, tag: params.tag }, {
+    router.get(route('listings.index'), { user_id: id, search: params.search, tag: params.tag  ,...params}, {
         // preserveState: true,
     })
 }
