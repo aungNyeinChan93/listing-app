@@ -15,11 +15,11 @@
             </div>
             <div class="mt-4 p-1">
                 <Link :href="route('listings.index')" class="btn-primary">Back</Link>
-                <Link :href="route('listings.index')" class="btn-primary !bg-yellow-400">Edit</Link>
+                <Link :href="route('listings.edit',listing.id)" class="btn-primary !bg-yellow-400">Edit</Link>
                 <Link :href="route('listings.index')" class="btn-primary !bg-red-400">Delete</Link>
             </div>
             <pre>
-                {{ listing }}
+                <!-- {{ listing }} -->
             </pre>
         </MyContainer>
 

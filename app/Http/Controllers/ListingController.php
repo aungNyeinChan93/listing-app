@@ -73,7 +73,7 @@ class ListingController extends Controller
 
         $request->user()->listings()->create($fields);
 
-        return to_route('listings.index')->with('message','Listing create Success!');
+        return to_route('listings.index')->with('message', 'Listing create Success!');
 
     }
 
@@ -94,7 +94,10 @@ class ListingController extends Controller
      */
     public function edit(Listing $listing)
     {
-        //
+        $listing->load('user');
+        return Inertia::render('Listings/Edit', [
+            'listing' => $listing,
+        ]);
     }
 
     /**
@@ -102,7 +105,7 @@ class ListingController extends Controller
      */
     public function update(Request $request, Listing $listing)
     {
-        //
+        dd($request->all());
     }
 
     /**
