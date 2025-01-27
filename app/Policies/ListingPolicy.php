@@ -21,7 +21,7 @@ class ListingPolicy
      */
     public function view(User $user, Listing $listing): bool
     {
-        return false;
+        return $listing->user->role !== 'suspended' && $listing->approved == true;
     }
 
     /**
@@ -29,7 +29,7 @@ class ListingPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return $user->role !== 'suspended';
     }
 
     /**
@@ -37,7 +37,7 @@ class ListingPolicy
      */
     public function update(User $user, Listing $listing): bool
     {
-        return false;
+        return $listing->user_id == $user->id && $listing->user->role !== 'suspended';
     }
 
     /**
@@ -45,7 +45,7 @@ class ListingPolicy
      */
     public function delete(User $user, Listing $listing): bool
     {
-        return false;
+        return $listing->user_id === $user->id && $listing->user->role !== 'suspended';
     }
 
     /**

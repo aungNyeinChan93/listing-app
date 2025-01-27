@@ -23,7 +23,7 @@ Route::middleware(['guest'])->group(function () {
     Route::post('login', [LoginController::class, 'store'])->name('login.store');
 });
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth','notSuspended'])->group(function () {
 
     // Logout
     Route::post('logout', [LoginController::class, 'logout'])->name('logout');
@@ -42,11 +42,11 @@ Route::middleware(['auth'])->group(function () {
     Route::put('profile/password', [ProfileController::class, 'passwordUpdate'])->name('profilePassword.update');
     Route::delete('profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+
     // listings
     Route::get('listings/testing',[ListingController::class,'test']);
     Route::get('listings/non-approved',[ListingController::class,'non_approved'])->name('listings.non-approved');
     Route::resource('listings', ListingController::class);
-
 });
 
 
