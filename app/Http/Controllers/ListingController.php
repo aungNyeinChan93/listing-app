@@ -82,7 +82,7 @@ class ListingController extends Controller
      */
     public function show(Listing $listing)
     {
-        $listing->load('user'); // Load the user relation
+        $listing->load('user'); // Load the user relation  || [$user => $listing->user ] || lsiting.user_id === user.id =>find()
 
         return Inertia::render('Listings/Show', [
             'listing' => $listing
