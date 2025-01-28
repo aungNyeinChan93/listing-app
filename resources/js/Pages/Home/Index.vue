@@ -1,7 +1,7 @@
 <template>
     <div class="mt-5">
 
-        <Head title="Home"/>
+        <Head title="Home" />
 
         <Link :class="{ 'bg-blue-700': $page.component == 'Home/Index' }" :href="route('home')"
             class="px-4 py-2 rounded bg-blue-400 ">
@@ -9,7 +9,7 @@
         </Link>
 
         <div class="grid grid-cols-12  gap-4 p-2">
-            <FlashMessage :message="$page.props.flash.message" :flash="$page.props.flash"/>
+            <FlashMessage :message="$page.props.flash.message" :flash="$page.props.flash" />
         </div>
 
         <MyContainer>
@@ -17,9 +17,9 @@
             <span class="ms-2 text-sm">( {{ userName }} )</span>
         </MyContainer>
 
-        <MyListings :listings="listings"/>
-
-
+        <div v-if="Object.keys(listings?.data).length || listings?.data">
+            <MyListings :listings="listings" />
+        </div>
 
 
         <!-- for debug -->
@@ -37,7 +37,7 @@ import FlashMessage from '../Components/FlashMessage.vue';
 import MyListings from './Sections/MyListings.vue';
 
 const props = defineProps({
-    listings:Object,
+    listings: Object,
 });
 const page = usePage();
 // console.log(page.props);

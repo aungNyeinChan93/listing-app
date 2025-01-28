@@ -14,9 +14,12 @@
                 </div>
             </div>
             <div class="mt-4 p-1">
-                <Link :href="route('listings.index')" class="btn-primary">Back</Link>
-                <Link v-if="user.id == listing.user_id || canEdit" :href="route('listings.edit',listing.id)" class="btn-primary !bg-yellow-400">Edit</Link>
-                <Link v-if="user.id == listing.user_id || canDelete" as="button" method="delete" :href="route('listings.destroy',listing.id)" class="btn-primary !bg-red-400">Delete</Link>
+                <button @click="back" class="btn-primary">Back</button>
+                <!-- <Link as="button" :href="route('listings.index')" class="btn-primary">Back</Link> -->
+                <Link as="button" v-if="user.id == listing.user_id || canEdit" :href="route('listings.edit', listing.id)"
+                    class="btn-primary !bg-yellow-400">Edit</Link>
+                <Link as="button" v-if="user.id == listing.user_id || canDelete" method="delete"
+                    :href="route('listings.destroy', listing.id)" class="btn-primary !bg-red-400">Delete</Link>
             </div>
 
             <!-- for debug -->
@@ -42,14 +45,15 @@ defineProps({
         type: Object,
         required: true,
     },
-    canEdit:{
-        type:Boolean
+    canEdit: {
+        type: Boolean
     },
-    canDelete:Boolean
+    canDelete: Boolean
 });
 
 const page = usePage();
-const user = computed(()=>page.props.auth.user)
+const user = computed(() => page.props.auth.user)
 
+const back =() => window.history.back();
 
 </script>

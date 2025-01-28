@@ -1,5 +1,6 @@
 <template>
     <article
+        :class="{'!bg-red-100':!listing.approved ,'!bg-green-100':listing?.approved}"
         class="rounded-lg border border-gray-100 bg-white p-4 shadow-sm transition hover:shadow-lg sm:p-6 w-[280px] h-[360px]">
         <span class="inline-block rounded bg-blue-600 p-2 text-white">
             <img :src="listing.image ? `/storage/${listing.image}` : `storage/images/listings/test.png`" alt="img"
@@ -30,10 +31,16 @@
                 &rarr;
             </span>
         </Link>
+
+        <div class="mt-2">
+            <p v-if="!listing.approved " class="badge inline !bg-red-500 text-xs text-white">pending</p>
+        </div>
+
+
     </article>
 
     <pre>
-        <!-- {{ listing }} -->
+        <!-- {{ listing.approved }} -->
     </pre>
 </template>
 
