@@ -21,7 +21,7 @@ class ListingPolicy
      */
     public function view(User $user, Listing $listing): bool
     {
-        return $listing->user->role !== 'suspended' && $listing->approved == true;
+        return $listing->user->role !== 'suspended' && ($listing->approved == true || $user->role === 'admin');
     }
 
     /**
@@ -62,5 +62,14 @@ class ListingPolicy
     public function forceDelete(User $user, Listing $listing): bool
     {
         return false;
+    }
+
+     /**
+     * Determine whether the user can permanently approved the model.
+     */
+    public function approved(User $user, Listing $listing): bool
+    {
+
+        return $user->role == 'admin' && $listing->user->role != 'suspended';
     }
 }

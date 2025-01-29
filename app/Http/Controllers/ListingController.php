@@ -148,7 +148,7 @@ class ListingController extends Controller implements HasMiddleware
         $tags = implode(',', array_unique(array_filter(array_map('trim', explode(',', $request->tags)))));
         $fields['tags'] = $tags;
 
-        $listing->update($fields);
+        $listing->update([...$fields, 'approved' => false]);
 
         return to_route('listings.index')->with('message', 'Listing Update Success!');
     }
@@ -184,5 +184,16 @@ class ListingController extends Controller implements HasMiddleware
         return inertia('Listings/NonApprovedList', [
             'listings' => $listings,
         ]);
+    }
+
+    // approved list
+    public function approved(Request $request, Listing $listing)
+    {
+        Gate::authorize('approved', $listing);
+        $listing->update([
+            'approved' => true
+        ]);
+
+        return back()->with('message', 'Success Listing Approved!');
     }
 }

@@ -12,6 +12,10 @@
         </div>
     </MyContainer>
 
+    <pre>
+        <!-- {{ users }} -->
+    </pre>
+
 </template>
 
 <script setup>

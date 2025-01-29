@@ -8,10 +8,11 @@ use Inertia\Inertia;
 class HomeController extends Controller
 {
     //index
-    public function index(){
-        $listings = request()->user()->listings()->with('user')->paginate(4);
-        return Inertia::render('Home/Index',[
-            'listings'=>$listings,
+    public function index()
+    {
+        $listings = request()->user()->role !== 'suspended'? request()->user()->listings()->with('user')->orderBy('approved', 'desc')->paginate(4) :null;
+        return Inertia::render('Home/Index', [
+            'listings' => $listings,
 
         ]);
     }

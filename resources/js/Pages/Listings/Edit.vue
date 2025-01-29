@@ -35,7 +35,8 @@
                         </div>
                         <div class="mt-2">
                             <button type="submit" class="btn-primary">Update</button>
-                            <Link as="button" :href="route('listings.index')" class="btn-primary !bg-gray-400"> Back</Link>
+                            <button @click="back" type="button" class="btn-primary !bg-gray-400">Back</button>
+                            <!-- <Link as="button" :href="route('listings.index')" class="btn-primary !bg-gray-400"> Back</Link> -->
                         </div>
                     </form>
 
@@ -79,6 +80,9 @@ const update = () => {
     });
 }
 
+const back = ()=>{
+    window.history.back();
+}
 </script>
 
 <style lang="scss" scoped></style>

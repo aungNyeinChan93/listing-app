@@ -12,19 +12,27 @@
             <FlashMessage :message="$page.props.flash.message" :flash="$page.props.flash" />
         </div>
 
-        <MyContainer>
+        <MyContainer class="px-10">
             <h1 class="inline">{{ appName }}</h1>
             <span class="ms-2 text-sm">( {{ userName }} )</span>
         </MyContainer>
 
-        <div v-if="Object.keys(listings?.data).length || listings?.data">
-            <MyListings :listings="listings" />
+        <!-- listing section -->
+        <div v-if="listings">
+            <div v-if="Object.keys(listings?.data).length">
+                <MyListings :listings="listings" />
+            </div>
         </div>
+        <div v-else>
+            <MyContainer> Your account has been <em class="text-red-400">suspended !</em> .Please contact with Admin <a
+                    class="text-blue-400" href="#">admin@gmial.com</a></MyContainer>
+        </div>
+        <!--End listing section -->
 
 
         <!-- for debug -->
         <pre>
-            <!-- {{ listings }} -->
+            <!-- {{ Object.keys(listings?.data).length }} -->
         </pre>
     </div>
 </template>

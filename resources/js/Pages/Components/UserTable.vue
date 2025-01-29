@@ -14,7 +14,7 @@
                     <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">{{ user.name }}</td>
                     <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ user.email }}</td>
                     <td class="whitespace-nowrap px-4 py-2 text-gray-700">
-                        {{ new Date(user.created_at).toLocaleDateString('en-GB') }}
+                        {{ new Date(user.created_at).toLocaleDateString('yangon') }}
                     </td>
                     <td class="whitespace-nowrap px-4 py-2 text-gray-700">
                         <Link :href="route(routeName, user.id)" class="text-blue-500 hover:text-blue-700">View

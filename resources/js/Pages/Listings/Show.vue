@@ -1,7 +1,8 @@
 <template>
+    <Head title="List Detail" />
+    
     <div>
 
-        <Head title="List Detail" />
         <MyContainer class="px-10">
             <h1 class="font-bold text-xl p-3">Detail List</h1>
             <div class="grid grid-cols-3 ">
@@ -14,22 +15,22 @@
                 </div>
             </div>
             <div class="mt-4 p-1">
-                <button @click="back" class="btn-primary">Back</button>
                 <!-- <Link as="button" :href="route('listings.index')" class="btn-primary">Back</Link> -->
+                <button @click="back" class="btn-primary">Back</button>
                 <Link as="button" v-if="user.id == listing.user_id || canEdit" :href="route('listings.edit', listing.id)"
                     class="btn-primary !bg-yellow-400">Edit</Link>
                 <Link as="button" v-if="user.id == listing.user_id || canDelete" method="delete"
                     :href="route('listings.destroy', listing.id)" class="btn-primary !bg-red-400">Delete</Link>
             </div>
-
-            <!-- for debug -->
-            <pre>
-                <!-- {{ listing }} -->
-                  <!-- {{ user }} -->
-                    <!-- {{ canEdit }} -->
-                      <!-- {{ canDelete }} -->
-            </pre>
         </MyContainer>
+
+        <!-- for debug -->
+        <pre>
+            <!-- {{ listing }} -->
+              <!-- {{ user }} -->
+                <!-- {{ canEdit }} -->
+                  <!-- {{ canDelete }} -->
+        </pre>
 
     </div>
 </template>

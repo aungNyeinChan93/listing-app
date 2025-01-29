@@ -2,7 +2,7 @@
     <div>
         <Head title="Pending List"/>
         <MyContainer>
-            <h4 class="text-2xl text-center font-bold p-2">Pending List</h4>
+            <h4 class="text-2xl text-center font-bold p-2">Pending List <span class="text-lg text-red-400">({{ listings.total }})</span></h4>
             <div v-if="Object.keys(listings.data).length">
                 <ListsCard :listings="listings" routeName="listings.show" />
                 <div class="mt-3 text-end px-1">

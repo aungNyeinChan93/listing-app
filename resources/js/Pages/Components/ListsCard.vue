@@ -31,6 +31,12 @@
                         {{ list.description.substring(0, 100) + " . . . " }}
                     </p>
 
+                    <!-- pending status -->
+
+                    <div class="mt-5 " v-if="!list.approved">
+                        <Link as="button" method="PUT" :href="route('listings.approved',list.id)" class=" badge !bg-red-400 text-sm text-slate-100 ">pending <i class="text-xs ms-1 fa-solid fa-circle-xmark"></i></Link>
+                    </div>
+
                 </blockquote>
             </div>
         </div>
