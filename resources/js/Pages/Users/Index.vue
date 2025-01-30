@@ -13,7 +13,6 @@
     </MyContainer>
 
     <pre>
-        <!-- {{ users }} -->
     </pre>
 
 </template>

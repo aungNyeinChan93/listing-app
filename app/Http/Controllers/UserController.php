@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Gate;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 
@@ -23,7 +24,7 @@ class UserController extends Controller
 
         return Inertia::render('Users/Index', [
             'users' => $users,
-            'search' => $request->search
+            'search' => $request->search,
         ]);
     }
 
@@ -36,6 +37,18 @@ class UserController extends Controller
 
     public function changeRole(Request $request, User $user)
     {
-        dd('hit',$user);
+        Gate::authorize('changeRole', $user);
+
+        $request->validate([
+            'role' => ['required', 'string']
+        ]);
+
+        if ($request->role && $user->id !== auth()->user()->id) {
+            $user->update([
+                'role' => $request->role,
+            ]);
+        }
+
+        return back()->with('message', "Successfully updated to $request->role role!");
     }
 }

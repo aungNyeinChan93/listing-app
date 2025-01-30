@@ -10,7 +10,7 @@
 
     <!-- listing Section -->
     <MyContainer class=" overflow-hidden">
-        <Table :listings="listings" />
+        <Table :listings="listings"  />
     </MyContainer>
 
     <!-- user section -->
@@ -18,9 +18,9 @@
         <UserSection :users="users" />
     </div>
 
-
     <pre>
-        <!-- {{ users }} -->
+        <!-- {{ flash }} -->
+          <!-- {{ canRoleChange }} -->
     </pre>
 
 </template>
@@ -43,6 +43,7 @@ const props = defineProps({
     },
     message: String,
     flash: Object,
+    canRoleChange:Boolean
 });
 </script>
 

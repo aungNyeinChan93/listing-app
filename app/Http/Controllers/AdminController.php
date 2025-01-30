@@ -27,6 +27,8 @@ class AdminController extends Controller implements HasMiddleware
             'listings' => $listings,
             'users' => $users,
             'message' => session('message'),
+            'canRoleChange'=> auth()->user()->isAdmin() ?? false,
+
         ]);
     }
 }

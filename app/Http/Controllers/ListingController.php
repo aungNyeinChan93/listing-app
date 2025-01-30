@@ -174,7 +174,7 @@ class ListingController extends Controller implements HasMiddleware
     {
         $listings = Listing::query()->with('user')
             ->where('approved', false)->paginate(6)->withQueryString();
-        return inertia('Listings/P', [
+        return inertia('Listings/Pending', [
             'listings' => $listings,
         ]);
     }
@@ -211,7 +211,6 @@ class ListingController extends Controller implements HasMiddleware
     // test
     public function test()
     {
-
         $listings = Listing::with('user')
             ->test('test')
             ->get();

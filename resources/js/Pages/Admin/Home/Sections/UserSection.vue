@@ -1,6 +1,7 @@
 <template>
+
     <MyContainer>
-        <Title class="px-5">User Section</Title>
+        <Title class="px-5">Users Section</Title>
         <div v-if="Object.keys(users?.data).length">
             <UserTable :users="users?.data" />
         </div>
@@ -11,6 +12,7 @@
             <Pagination :links="users?.links"  />
         </MyContainer>
     </MyContainer>
+
 </template>
 
 <script setup>
@@ -18,7 +20,6 @@ import MyContainer from '../../../Components/MyContainer.vue';
 import Title from '../../../Components/Title.vue';
 import UserTable from '../Components/UserTable.vue';
 import Pagination from '../../../Components/Pagination.vue';
-
 
 defineProps({
     users: Object,

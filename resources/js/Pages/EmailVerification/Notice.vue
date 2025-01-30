@@ -19,7 +19,7 @@ import MyContainer from "../Components/MyContainer.vue";
 import FlashMessage from "../Components/FlashMessage.vue";
 
 
-defineProps({
+const props = defineProps({
     message: String,
     flash: Object,
 });
