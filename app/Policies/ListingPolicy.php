@@ -11,9 +11,9 @@ class ListingPolicy
     /**
      * Determine whether the user can view any models.
      */
-    public function viewAny(User $user): bool
+    public function allPending(User $user ): bool
     {
-        return false;
+        return $user->role == 'admin';
     }
 
     /**
@@ -21,7 +21,7 @@ class ListingPolicy
      */
     public function view(User $user, Listing $listing): bool
     {
-        return $listing->user->role !== 'suspended' && ($listing->approved == true || $user->role === 'admin');
+        return ($listing->user->role !== 'suspended' || $user->role == 'admin') && ($listing->approved == true || $user->role === 'admin');
     }
 
     /**
@@ -64,12 +64,17 @@ class ListingPolicy
         return false;
     }
 
-     /**
+    /**
      * Determine whether the user can permanently approved the model.
      */
     public function approved(User $user, Listing $listing): bool
     {
 
         return $user->role == 'admin' && $listing->user->role != 'suspended';
+    }
+
+    public function reject(User $user, Listing $listing)
+    {
+        return $user->role === 'admin';
     }
 }

@@ -27,7 +27,7 @@ class ListingController extends Controller implements HasMiddleware
     public function index(Request $request)
     {
         $listings = Listing::query()
-            ->whereHas('user', function (Builder $query) {   //call user model if has user relation
+            ->whereHas('user', function (Builder $query) {   //call user model if has user relation  -> {ONLY NOT SUSPENDED USER'S LISTS}
                 $query->where('role', '!=', 'suspended');
             })
             ->with('user')
@@ -42,7 +42,10 @@ class ListingController extends Controller implements HasMiddleware
 
         return Inertia::render('Listings/Index', [
             'listings' => $listings,
-            'search' => $request->search
+            'search' => $request->search,
+            'allPending' => fn() => auth()->user()->can('allPending', Listing::class) ?? false,
+            'role' => request()->user() ? request()->user()->role : false,
+            'user' => auth()->user() ?? false,
         ]);
     }
 
@@ -166,22 +169,12 @@ class ListingController extends Controller implements HasMiddleware
         return to_route('listings.index')->with('message', 'Listing delete Success!');
     }
 
-    // test
-    public function test()
-    {
-
-        $listings = Listing::with('user')
-            ->test('test')
-            ->get();
-        return $listings;
-    }
-
     // non_approved
-    public function non_approved(Request $request)
+    public function pending(Request $request)
     {
         $listings = Listing::query()->with('user')
             ->where('approved', false)->paginate(6)->withQueryString();
-        return inertia('Listings/NonApprovedList', [
+        return inertia('Listings/P', [
             'listings' => $listings,
         ]);
     }
@@ -190,10 +183,38 @@ class ListingController extends Controller implements HasMiddleware
     public function approved(Request $request, Listing $listing)
     {
         Gate::authorize('approved', $listing);
-        $listing->update([
-            'approved' => true
-        ]);
+        if (!$listing->approved) {
+            $listing->update([
+                'approved' => true
+            ]);
 
-        return back()->with('message', 'Success Listing Approved!');
+            return back()->with('message', 'Success Listing Approved!');
+        }
+        return back();
+    }
+
+    // reject
+    public function reject(Request $request, Listing $listing)
+    {
+        Gate::authorize('reject', $listing);
+
+        if ($listing->approved) {
+            $listing->update([
+                'approved' => false,
+            ]);
+            return back()->with('message', 'Reject Sccess!');
+        }
+        return back();
+    }
+
+
+    // test
+    public function test()
+    {
+
+        $listings = Listing::with('user')
+            ->test('test')
+            ->get();
+        return $listings;
     }
 }

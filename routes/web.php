@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -45,9 +46,17 @@ Route::middleware(['auth','notSuspended'])->group(function () {
 
     // listings
     Route::get('listings/testing',[ListingController::class,'test']);
-    Route::get('listings/non-approved',[ListingController::class,'non_approved'])->name('listings.non-approved');
+    Route::get('listings/pending',[ListingController::class,'pending'])->name('listings.pending');
     Route::put('listings/{listing}/approved',[ListingController::class,'approved'])->name('listings.approved');
+    Route::put('listings/{listing}/reject',[ListingController::class,'reject'])->name('listings.reject');
     Route::resource('listings', ListingController::class);
+
+
+    // admin
+    Route::get('admins',[AdminController::class,'index'])->name('admins.index');
 });
+
+
+
 
 

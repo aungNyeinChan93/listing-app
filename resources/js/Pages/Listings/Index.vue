@@ -32,7 +32,7 @@
                         <Link :href="route('listings.create')" class="flex items-center">
                             <i class="fa-solid fa-plus border border-blue-600 p-2 rounded-full "></i>
                         </Link>
-                        <Link as="button" :href="route('listings.non-approved')" class="btn-primary">Pending</Link>
+                        <Link as="button" :href="route('listings.pending')" class="btn-primary" v-if="allPending">Pending</Link>
                         <SearchInput label="search" placeholder="search" type="text" :action="submit"
                             v-model="form.search" />
                     </div>
@@ -55,6 +55,10 @@
         </MyContainer>
     </div>
 
+    <pre>
+        <!-- {{ allPending }} -->
+    </pre>
+
 </template>
 
 <script setup>
@@ -67,6 +71,7 @@ import { router, useForm } from "@inertiajs/vue3";
 import { throttle } from 'lodash';
 import { watch } from "vue";
 import FlashMEssage from '../Components/FlashMessage.vue'
+import { all } from "axios";
 
 const props = defineProps({
     listings: {
@@ -75,6 +80,10 @@ const props = defineProps({
     },
     search: String,
     flash:Object,
+    role:String,
+    user:Object,
+    allPending:Boolean
+
 });
 
 const params = route().params;

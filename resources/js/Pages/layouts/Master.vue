@@ -103,13 +103,14 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <!--  -->
-                                <!-- <Link :class="{ 'bg-teal-400': $page.component == 'Auth/Logout' }"
-                                    v-if="$page.props.auth.user" as="button" method="POST"
-                                    class="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-gray-400"
-                                    :href="route('logout')">
-                                Logout
-                                </Link> -->
+
+                                <!-- admin  -->
+                                <Link :class="{ 'bg-teal-400': $page.component == 'Admin/Index' }"
+                                    v-if="$page.props.auth.user.role == 'admin'" as="button"
+                                    class="rounded-md bg-gray-100 hover:bg-gray-400 px-5 py-2.5 text-sm font-medium text-gray-400 hover:text-gray-100"
+                                    :href="route('admins.index')">
+                                <i class="fa-solid fa-lock"></i>
+                                </Link>
                             </div>
 
                             <div class="hidden sm:flex">

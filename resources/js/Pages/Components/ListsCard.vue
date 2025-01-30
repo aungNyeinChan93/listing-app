@@ -6,16 +6,21 @@
                 <blockquote v-for="list in listings.data" :key="list.id"
                     class="rounded-lg bg-gray-50 p-6 shadow-sm sm:p-8">
                     <div class="flex items-center gap-4">
-                        <img alt=""
-                            :src="list.image ? `/storage/${list.image}` :`/storage/images/listings/test.png`"
+                        <img alt="" :src="list.image ? `/storage/${list.image}` : `/storage/images/listings/test.png`"
                             class="!size-14 rounded-full object-contain object-center " />
 
                         <div>
                             <p class="mt-0.5 text-lg font-medium text-gray-900 hover:text-red-400">
                                 <Link :href="route(routeName, list.id)">{{ list.title }}</Link>
                             </p>
-                            <p @click="userFilter(list.user_id)" class="text-green-500 hover:text-red-400 text-sm">{{
-                                list.user.name }}</p>
+                            <div class="flex space-x-2 items-center justify-between mt-3">
+                                <p @click="userFilter(list.user_id)" class="text-green-500 hover:text-red-400 text-sm">
+                                    {{
+                                        list.user.name }}
+                                </p>
+                                <span class="badge !bg-red-200 text-xs font-light text-slate-500"
+                                    v-if="list.user.role === 'suspended'">suspended</span>
+                            </div>
                         </div>
                     </div>
 
@@ -34,7 +39,9 @@
                     <!-- pending status -->
 
                     <div class="mt-5 " v-if="!list.approved">
-                        <Link as="button" method="PUT" :href="route('listings.approved',list.id)" class=" badge !bg-red-400 text-sm text-slate-100 ">pending <i class="text-xs ms-1 fa-solid fa-circle-xmark"></i></Link>
+                        <Link as="button" method="PUT" :href="route('listings.approved', list.id)"
+                            class=" badge !bg-red-400 text-sm text-slate-100 ">pending <i
+                            class="text-xs ms-1 fa-solid fa-circle-xmark"></i></Link>
                     </div>
 
                 </blockquote>
@@ -61,7 +68,7 @@ defineProps({
 const params = route().params;
 
 const userFilter = (id) => {
-    router.get(route('listings.index'), { user_id: id, search: params.search, tag: params.tag  ,...params}, {
+    router.get(route('listings.index'), { user_id: id, search: params.search, tag: params.tag, ...params }, {
         // preserveState: true,
     })
 }
