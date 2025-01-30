@@ -2,6 +2,11 @@
     <h1 class="text-2xl font-bold pb-4 px-1 underline underline-offset-8 uppercase">
         Listing Lists
     </h1>
+    <div class="p-2 flex space-x-4 items-center">
+        <p>Suspended User <i class="ms-1 fa-solid fa-ban text-red-400"></i></p>
+        <p>Pending <i class="ms-1 fa-solid fa-circle-xmark text-yellow-400" ></i></p>
+        <p>Approved <i class="ms-1 fa-solid fa-circle-check text-green-400"></i></p>
+    </div>
     <div class="overflow-x-auto rounded-lg border border-green-200">
         <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm overflow-hidden">
             <thead class="ltr:text-left rtl:text-right">
@@ -28,12 +33,12 @@
             </thead>
 
             <tbody class="divide-y divide-gray-200">
-                <tr v-for="listing in listings.data" :key="listing" class="bg-green-100/30 " :class="{'!bg-red-100/30': listing?.user.role === 'suspended',}">
-                    <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 text-xs">
-                        {{ listing.user.name.toUpperCase() }}
+                <tr v-for="listing in listings.data" :key="listing" class="bg-green-100/30 " :class="{'!bg-red-100/30': !listing?.approved}">
+                    <td class="whitespace-nowrap px-4 py-2  text-gray-900 text-xs">
+                        {{ listing.user.name.toUpperCase() }} <span class="ms-1 text-red-600" v-if="listing?.user.role === 'suspended'"><i class="fa-solid fa-ban"></i></span>
                     </td>
 
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 text-xs">
                         {{ listing.title }}
                     </td>
 
@@ -46,10 +51,10 @@
                         <i class="fa-solid fa-circle-check text-green-400"></i>
                     </td>
                     <td v-else class="text-center whitespace-nowrap px-4 py-2 text-gray-700">
-                        <i class="fa-solid fa-circle-xmark text-red-400"></i>
+                        <i class="fa-solid fa-circle-xmark text-yellow-400"></i>
                     </td>
 
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 text-xs">
                         {{ new Date(listing.created_at).toLocaleDateString('yangon') }} |
                         {{ new Date(listing.created_at).toLocaleTimeString('yangon', { hour: '2-digit', minute: '2-digit' }) }}
                     </td>
@@ -71,10 +76,6 @@
         <Pagination :links="listings.links" />
     </MyContainer>
 
-
-    <pre>
-        <!-- {{ message }} -->
-    </pre>
 </template>
 
 <script setup>

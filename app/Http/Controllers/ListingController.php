@@ -36,7 +36,7 @@ class ListingController extends Controller implements HasMiddleware
             ->when($request->search, function ($q) use ($request) {
                 $q->whereAny(['title', 'description', 'tags'], 'like', '%' . $request->search . '%');
             })
-            ->orderBy('created_at', 'desc')
+            ->latest()
             ->paginate(6)
             ->withQueryString();
 
