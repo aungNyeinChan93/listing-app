@@ -1,23 +1,28 @@
 <template>
-    <Head title="Admin Dashboard"/>
 
-    <FlashMessage :message="message" :flash="flash"/>
+    <Head title="Admin Dashboard" />
+
+    <FlashMessage :message="message" :flash="flash" />
 
     <MyContainer>
         Admin {{ $page.props.auth.user.name }}
     </MyContainer>
 
+    <!-- listing Section -->
     <MyContainer class=" overflow-hidden">
-        <Table :listings="listings"/>
+        <Table :listings="listings" />
     </MyContainer>
 
+    <!-- user section -->
+    <div>
+        <UserSection :users="users" />
+    </div>
+
+
     <pre>
-        <!-- {{ listings }} -->
-        <!-- {{ message }} -->
-          <!-- {{ flash }} -->
+        <!-- {{ users }} -->
     </pre>
 
-    
 </template>
 
 
@@ -26,17 +31,19 @@
 import MyContainer from '../../Components/MyContainer.vue'
 import Table from './Components/Table.vue';
 import FlashMessage from '../../Components/FlashMessage.vue'
+import UserSection from './Sections/UserSection.vue';
 
 
 const props = defineProps({
-    listings:{
-        type:Object
+    listings: {
+        type: Object
     },
-    message:String,
-    flash:Object,
+    users: {
+        type: Object
+    },
+    message: String,
+    flash: Object,
 });
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

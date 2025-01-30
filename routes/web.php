@@ -35,6 +35,7 @@ Route::middleware(['auth','notSuspended'])->group(function () {
     // Users
     Route::get('users', [UserController::class, 'index'])->name('users.index');
     Route::get('users/detail/{user}', [UserController::class, 'show'])->name('users.show');
+    Route::post('users/{user}/changeRole', [UserController::class, 'changeRole'])->name('users.changeRole');
 
     // Profile
     Route::get('profile', [ProfileController::class, 'index'])

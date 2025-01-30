@@ -38,10 +38,11 @@
                                 <a class="text-gray-500 transition hover:text-gray-500/75" href="#"> Projects </a>
                             </li>
 
-                            <li>
-                                <a class="text-gray-500 transition hover:text-gray-500/75" href="#"> Blog </a>
+                            <li v-if="$page.props.isAdmin">
+                                <a class="text-gray-500 transition hover:text-gray-500/75" href="#"> Admin </a>
                             </li>
                         </ul>
+
                     </nav>
 
                     <div class="flex items-center gap-4">
@@ -111,6 +112,8 @@
                                     :href="route('admins.index')">
                                 <i class="fa-solid fa-lock"></i>
                                 </Link>
+
+
                             </div>
 
                             <div class="hidden sm:flex">

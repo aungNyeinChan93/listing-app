@@ -6,7 +6,8 @@
                     <UserCard :user="user" />
                 </div>
             </div>
-            <Link :href="route('home')"> Back</Link>
+            <Link :href="route('home')"><i class="fa-solid fa-home ms-4 text-green-200 hover:text-green-300"> Home </i></Link>
+            <button @click="back"> <i class="fa-solid fa-backward ms-4 text-green-200 hover:text-green-300"> Back </i></button>
         </MyContainer>
     </div>
 </template>
@@ -22,4 +23,8 @@ defineProps({
         required: true
     }
 });
+
+const back =()=>{
+    window.history.back();
+}
 </script>

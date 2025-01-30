@@ -2,7 +2,7 @@
     <h1 class="text-2xl font-bold pb-4 px-1 underline underline-offset-8 uppercase">
         Listing Lists
     </h1>
-    <div class="p-2 flex space-x-4 items-center">
+    <div class="p-2 flex space-x-10 items-center">
         <p>Suspended User <i class="ms-1 fa-solid fa-ban text-red-400"></i></p>
         <p>Pending <i class="ms-1 fa-solid fa-circle-xmark text-yellow-400" ></i></p>
         <p>Approved <i class="ms-1 fa-solid fa-circle-check text-green-400"></i></p>
@@ -11,16 +11,16 @@
         <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm overflow-hidden">
             <thead class="ltr:text-left rtl:text-right">
                 <tr>
-                    <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                    <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 ">
                         User Name
                     </th>
-                    <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                    <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 ">
                         Title
                     </th>
-                    <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                    <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 ">
                         Tags
                     </th>
-                    <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                    <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 ">
                         Status
                     </th>
                     <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
@@ -34,20 +34,20 @@
 
             <tbody class="divide-y divide-gray-200">
                 <tr v-for="listing in listings.data" :key="listing" class="bg-green-100/30 " :class="{'!bg-red-100/30': !listing?.approved}">
-                    <td class="whitespace-nowrap px-4 py-2  text-gray-900 text-xs">
-                        {{ listing.user.name.toUpperCase() }} <span class="ms-1 text-red-600" v-if="listing?.user.role === 'suspended'"><i class="fa-solid fa-ban"></i></span>
+                    <td class="whitespace-nowrap px-4 py-2  text-gray-900 text-xs ">
+                        {{ listing.user.name.toUpperCase() }} <span class="ms-3 text-red-600" v-if="listing?.user.role === 'suspended'"><i class="fa-solid fa-ban"></i></span>
                     </td>
 
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700 text-xs">
-                        {{ listing.title }}
+                    <td class="  whitespace-nowrap px-4 py-2 text-gray-700 text-sm">
+                        {{ listing.title.substring(0,15) }}
                     </td>
 
-                    <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+                    <td class=" whitespace-nowrap px-4 py-2 text-gray-700">
                         <span v-for="tag in listing?.tags.split(',')" :key="tag.id" class="badge ms-1 text-xs">{{ tag
                             }}</span>
                     </td>
 
-                    <td v-if="listing?.approved" class="text-center whitespace-nowrap px-4 py-2 text-gray-700">
+                    <td v-if="listing?.approved" class=" text-center whitespace-nowrap px-4 py-2 text-gray-700">
                         <i class="fa-solid fa-circle-check text-green-400"></i>
                     </td>
                     <td v-else class="text-center whitespace-nowrap px-4 py-2 text-gray-700">
@@ -62,9 +62,9 @@
                     <td class="whitespace-nowrap px-4 py-2 text-gray-700 text-center">
                         <Link :href="route('listings.show', listing.id)" class="btn-primary text-xs"><i
                             class="fa-solid fa-eye"></i></Link>
-                        <Link as="button" method="PUT" :href="route('listings.approved', listing.id)" class="btn-primary !bg-green-500 text-xs"><i
+                        <Link as="button" method="PUT" :href="route('listings.approved', listing.id)" class="btn-primary !bg-green-500 !hover:bg-green-400 text-xs"><i
                             class="fa-solid fa-check"></i></Link>
-                        <Link  as="button" method="PUT" :href="route('listings.reject', listing.id)" class="btn-primary !bg-red-500 text-xs"><i
+                        <Link  as="button" method="PUT" :href="route('listings.reject', listing.id)" class="btn-primary !bg-red-500 !hover:bg-red-400 text-xs"><i
                             class="fa-solid fa-ban"></i></Link>
                     </td>
                 </tr>

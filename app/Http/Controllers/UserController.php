@@ -33,4 +33,9 @@ class UserController extends Controller
             'user' => $user,
         ]);
     }
+
+    public function changeRole(Request $request, User $user)
+    {
+        dd('hit',$user);
+    }
 }

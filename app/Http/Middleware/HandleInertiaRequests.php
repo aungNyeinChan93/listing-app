@@ -38,16 +38,17 @@ class HandleInertiaRequests extends Middleware
         return array_merge(parent::share($request), [
             //
             'auth.user' => fn() => $request->user()
-                ? $request->user()->only('id', 'name', 'email','role')
+                ? $request->user()->only('id', 'name', 'email', 'role')
                 : null,
             'flash' => [
                 'message' => fn() => $request->session()->get('message'),
                 'status' => fn() => $request->session()->get('status'),
                 'success' => fn() => $request->session()->get('success'),
             ],
-            'app'=>[
-                'name'=>config('app.name')??'Laravel',
+            'app' => [
+                'name' => config('app.name') ?? 'Laravel',
             ],
+            'isAdmin' => fn() => $request->user() ? $request->user()->role === 'admin' : false
         ]);
     }
 }

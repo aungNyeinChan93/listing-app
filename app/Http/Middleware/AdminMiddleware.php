@@ -15,10 +15,9 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if($request->user()->role !== 'admin'){
-            abort(403,'only for admin user');
-        }else{
-            return $next($request);
-        }
+        return $request->user()->role === 'admin' && $request->user()->isAdmin()
+        ? $next($request)
+        : abort(403, 'This route for only Admin Users');
+
     }
 }
