@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\NotSuspendedMiddleware;
 use Illuminate\Foundation\Application;
 use App\Http\Middleware\HandleInertiaRequests;
@@ -18,6 +19,7 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
         $middleware->alias([
             'notSuspended'=>NotSuspendedMiddleware::class,
+            'admin'=>AdminMiddleware::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
