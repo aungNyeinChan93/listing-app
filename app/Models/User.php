@@ -70,9 +70,9 @@ class User extends Authenticatable implements MustVerifyEmail
             });
         }
 
-        if ($filters['role'] && $filters['role'] !=='all'  ?? false) {
+        if (($filters['role'] ?? false) && ($filters['role'] !== 'all' ?? false)) {
             $query->where(function ($q1) {
-                $q1->where('role', 'like','%'.request()->role.'%');
+                $q1->where('role', 'like', '%' . request()->role . '%');
             });
         }
     }

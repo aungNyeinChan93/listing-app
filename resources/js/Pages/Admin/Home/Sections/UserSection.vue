@@ -10,7 +10,7 @@
                 <div>
                     <form @submit.prevent="filterByRole">
                         <select v-model="form.role" class="w-100px mx-2 rounded-lg border border-green-600">
-                            <option value="all" selected>All</option>
+                            <option value="all" :selected="!form.role">All</option>
                             <option value="admin">Admin</option>
                             <option value="general">General</option>
                             <option value="suspended">Suspended</option>
@@ -54,12 +54,12 @@ import { throttle } from 'lodash'
 const props = defineProps({
     users: Object,
     search: String,
-    role: String
+    role:String,
 });
 
 const form = useForm({
     search: props.search,
-    role: props.role
+    role: props.role ?? 'all'
 })
 
 const params = route().params;
