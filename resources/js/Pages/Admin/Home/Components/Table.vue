@@ -99,6 +99,7 @@
 
 <script setup>
 import { router, useForm } from "@inertiajs/vue3";
+import { watch } from "vue";
 import MyContainer from "../../../Components/MyContainer.vue";
 import Pagination from "../../../Components/Pagination.vue";
 import SearchInput from '../../../Components/SearchInput.vue'
@@ -122,6 +123,8 @@ const action = () => {
         preserveScroll: true, preserveState: true, onFinish: () => console.log('hit')
     })
 }
+
+
 
 
 </script>

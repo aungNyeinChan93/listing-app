@@ -12,7 +12,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable implements MustVerifyEmail
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable ;
+    use HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -55,7 +55,25 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Listing::class);
     }
 
-    public function isAdmin(){
+    public function isAdmin()
+    {
         return $this->role === 'admin';
+    }
+
+    // filter
+    public function scopeFilter($query, array $filters)
+    {
+
+        if ($filters['search'] ?? false) {
+            $query->where(function ($q1) use ($filters) {
+                $q1->whereAny(['name', 'email', 'role'], 'like', '%' . $filters['search'] . '%');
+            });
+        }
+
+        if ($filters['role'] && $filters['role'] !=='all'  ?? false) {
+            $query->where(function ($q1) {
+                $q1->where('role', 'like','%'.request()->role.'%');
+            });
+        }
     }
 }

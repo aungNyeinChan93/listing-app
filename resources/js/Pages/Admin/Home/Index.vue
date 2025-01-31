@@ -48,13 +48,12 @@
 
     <!-- user section -->
     <div v-show="userShow">
-        <UserSection :users="users" />
+        <UserSection :users="users" :search="search" :role="role" />
     </div>
 
     <pre>
-        {{ listShow }}
+        <!-- {{ users.data.length }} -->
     </pre>
-
 </template>
 
 
@@ -74,10 +73,15 @@ const props = defineProps({
     users: {
         type: Object
     },
+    approvedList:{
+        type:Array,
+        required:true
+    },
     message: String,
     flash: Object,
     canRoleChange: Boolean,
-    search: String
+    search: String,
+    role: String
 });
 
 const listShow = ref(localStorage.getItem('list') == 'true')

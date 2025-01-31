@@ -6,7 +6,7 @@
             class="w-full rounded-md border-gray-200 py-2.5 pe-10 shadow-sm sm:text-sm" />
 
         <span class="absolute inset-y-0 end-0 grid w-10 place-content-center">
-            <button @click="action" type="button" class="text-gray-600 hover:text-gray-700">
+            <button @click.prevent="action" type="button" class="text-gray-600 hover:text-gray-700">
                 <span class="sr-only">{{ label }}</span>
 
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
