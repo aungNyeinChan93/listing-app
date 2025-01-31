@@ -11,9 +11,9 @@
                 <span class="text-red-500 capitalize">{{ $page.props.auth.user.name }}</span>
             </div>
 
-            <!-- show-hide section -->
+            <!-- show-hide -->
             <div>
-                <button @click="listShow = !listShow" class="ms-4 px-2 py-1 bg-green-400 rounded-lg text-white"
+                <button @click="toggleList" class="ms-4 px-2 py-1 bg-green-400 rounded-lg text-white"
                     :class="{ '!bg-red-400': !listShow }">
                     <div v-if="listShow">
                         <span>Listing</span>
@@ -24,7 +24,7 @@
                         <i class="ms-2 fa-solid fa-eye-slash"></i>
                     </div>
                 </button>
-                <button @click="userShow = !userShow" class="ms-4 px-2 py-1 bg-green-400 rounded-lg text-white"
+                <button @click="toggleUser" class="ms-4 px-2 py-1 bg-green-400 rounded-lg text-white"
                     :class="{ '!bg-red-400': !userShow }">
                     <div v-if="userShow">
                         <span>User</span>
@@ -51,6 +51,10 @@
         <UserSection :users="users" />
     </div>
 
+    <pre>
+        {{ listShow }}
+    </pre>
+
 </template>
 
 
@@ -76,8 +80,29 @@ const props = defineProps({
     search: String
 });
 
-const listShow = ref(false)
-const userShow = ref(false)
+const listShow = ref(localStorage.getItem('list') == 'true')
+const userShow = ref(localStorage.getItem('user') == 'true')
+
+const toggleList = () => {
+    if (!listShow.value) {
+        listShow.value = true;
+        localStorage.setItem('list', true);
+    } else {
+        listShow.value = false;
+        localStorage.setItem('list', false);
+    }
+}
+
+const toggleUser = () => {
+    if (!userShow.value) {
+        userShow.value = true;
+        localStorage.setItem('user', true);
+    } else {
+        userShow.value = false;
+        localStorage.setItem('user', false);
+    }
+}
+
 
 </script>
 
