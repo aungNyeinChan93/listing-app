@@ -44,7 +44,7 @@ const changeRole = () => {
 
         ? form.post(route('users.changeRole', props.user?.id))
 
-        : false
+        : form.role = props.user?.role
 }
 </script>
 

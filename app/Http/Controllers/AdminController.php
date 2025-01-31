@@ -19,16 +19,21 @@ class AdminController extends Controller implements HasMiddleware
         ];
     }
     // index
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::query()->with('listings')->latest()->paginate('10');
-        $listings = Listing::query()->with('user')->latest()->paginate('6');
+        $users = User::query()->with('listings')
+            ->latest()->paginate('10');
+
+        $listings = Listing::query()->with('user')
+            ->filter(request(['search']))
+            ->latest()->paginate('6')->withQueryString();
+
         return Inertia::render('Admin/Home/Index', [
             'listings' => $listings,
             'users' => $users,
             'message' => session('message'),
-            'canRoleChange'=> auth()->user()->isAdmin() ?? false,
-
+            'canRoleChange' => auth()->user()->isAdmin() ?? false,
+            'search'=>$request->search
         ]);
     }
 }

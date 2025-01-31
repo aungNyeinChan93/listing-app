@@ -71,7 +71,6 @@ import { router, useForm } from "@inertiajs/vue3";
 import { throttle } from 'lodash';
 import { watch } from "vue";
 import FlashMEssage from '../Components/FlashMessage.vue'
-import { all } from "axios";
 
 const props = defineProps({
     listings: {
