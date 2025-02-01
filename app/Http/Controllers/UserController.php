@@ -73,17 +73,22 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
-        // dd($user->listings()->get());
 
-        $images = [];
-        foreach ($user->listings()->get()->toArray() as $key => $listing) {
-            $images[] = $listing['image'];
-            // if ($listing['image']) {
-            //     Storage::disk('public')->delete($listing['images']);
-            // }
-        }
+        // $images = [];
+        // foreach ($user->listings()->get()->toArray() as $key => $listing) {
+        //     $images[] = $listing['image'];
+        //     // if ($listing['image']) {
+        //     //     Storage::disk('public')->delete($listing['images']);
+        //     // }
+        // }
 
-        if ($images) {
+        $images = array_map(function ($listing) {
+            return $listing['image'];
+        }, $user->listings()->get()->toArray());
+
+        $hasEmpty = collect($images)->filter(fn($image) => $image != null)->isNotEmpty();
+
+        if (isset($images) && $hasEmpty) {
             Storage::disk('public')->delete($images);
         }
 
