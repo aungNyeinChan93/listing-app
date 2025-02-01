@@ -55,6 +55,7 @@ class UserController extends Controller
     // lists
     public function lists(Request $request, User $user)
     {
+
         return Inertia::render("Users/Lists", [
             'listings' => $user->listings()
                 ->when(request('status')== 'approve',function($query){
@@ -64,7 +65,8 @@ class UserController extends Controller
                     $query->where('approved',false);
                 })
                 ->paginate(4)->withQueryString(),
-            'user' => $user
+            'user' => $user,
+            'message'=>session('message')
         ]);
     }
 }

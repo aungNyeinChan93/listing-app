@@ -6,6 +6,11 @@
 
         <Title>{{ user.name.toUpperCase() }} LISTINGS</Title>
 
+        <!-- flash session -->
+        <div v-if="flash">
+            <FlashMessage :message="flash.message" :flash="flash"/>
+        </div>
+
         <!-- filter section -->
         <div class="flex justify-start items-center px-2 my-4 space-x-3">
             <Link :class="{ '!bg-red-400': $page.url === `/users/${user?.id}/lists` }" as="button"
@@ -57,11 +62,14 @@ import MyContainer from '../Components/MyContainer.vue';
 import Title from '../Components/Title.vue';
 import ListCard from './Components/ListCard.vue';
 import Pagination from '../Components/Pagination.vue';
+import FlashMessage from '../Components/FlashMessage.vue';
 
 
 const props = defineProps({
     listings: Object,
-    user: Object
+    user: Object,
+    flash:Object,
+    message:String
 });
 
 const params = route().params

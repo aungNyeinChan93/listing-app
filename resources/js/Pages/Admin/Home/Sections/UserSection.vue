@@ -56,9 +56,8 @@
 
     <pre>
         <!-- {{ role }} -->
-
-        <input type="text" name="" id="" @input="text" hidden>
-        <input type="checkbox" name="" id="" @input="checkbox" hidden>
+        <!-- <input hidden type="text" name="" id="" @input="text" > -->
+        <!-- <input hidden type="checkbox" name="" id="" @input="checkbox" > -->
     </pre>
 
 </template>
@@ -111,13 +110,6 @@ const suspended = (e) => {
             role: null
         }))
     }
-}
-
-function text(e){
-    console.log('test',e,e.data,e.target.value);
-}
-function checkbox(e){
-    console.log(e);
 }
 
 </script>
