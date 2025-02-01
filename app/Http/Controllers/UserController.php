@@ -51,4 +51,20 @@ class UserController extends Controller
 
         return back()->with('message', "Successfully updated to $request->role role!");
     }
+
+    // lists
+    public function lists(Request $request, User $user)
+    {
+        return Inertia::render("Users/Lists", [
+            'listings' => $user->listings()
+                ->when(request('status')== 'approve',function($query){
+                    $query->where('approved',true);
+                })
+                ->when(request('status')=== 'pending',function ($query){
+                    $query->where('approved',false);
+                })
+                ->paginate(4)->withQueryString(),
+            'user' => $user
+        ]);
+    }
 }

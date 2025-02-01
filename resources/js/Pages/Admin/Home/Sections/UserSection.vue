@@ -51,13 +51,14 @@
         <MyContainer class="text-end text-xs border !border-green-200 mx-4">
             <Pagination :links="users?.links" />
         </MyContainer>
+
     </MyContainer>
 
     <pre>
         <!-- {{ role }} -->
 
-        <input type="text" name="" id="" @input="text" >
-        <input type="checkbox" name="" id="" @input="checkbox" >
+        <input type="text" name="" id="" @input="text" hidden>
+        <input type="checkbox" name="" id="" @input="checkbox" hidden>
     </pre>
 
 </template>

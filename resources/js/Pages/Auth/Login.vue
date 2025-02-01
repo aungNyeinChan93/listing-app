@@ -16,7 +16,7 @@ const form = useForm({
 
 const login = () => {
     form.post('login', {
-        onError: () => form.reset('email'),
+        onError: () => form.reset('password'),
     })
 }
 

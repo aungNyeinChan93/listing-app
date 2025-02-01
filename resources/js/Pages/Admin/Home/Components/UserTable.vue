@@ -50,7 +50,7 @@
                         <td class="whitespace-nowrap px-4 py-2 text-gray-700 w-2/6 text-center">
                             <Link class="text-blue-400 p-2 ms-2" :href="route('users.show', user.id)"><i
                                 class="fa-solid fa-eye"></i></Link>
-                            <Link class="text-yellow-400 p-2 ms-2" :href="route('users.show', user.id)"><i
+                            <Link class="text-yellow-400 p-2 ms-2" :href="route('users.lists', user.id)"><i
                                 class="fa-solid fa-pen"></i></Link>
                             <Link class="text-red-400 p-2 ms-2" :href="route('users.show', user.id)"><i
                                 class="fa-solid fa-trash"></i></Link>

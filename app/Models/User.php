@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Listing;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -74,6 +75,19 @@ class User extends Authenticatable implements MustVerifyEmail
             $query->where(function ($q1) {
                 $q1->where('role', 'like', '%' . request()->role . '%');
             });
+        }
+        if ($filters['status'] ?? false) {
+            if ($filters['status'] === 'approve') {
+                $query->whereHas('listings', function (Builder $builder) {
+                    $builder->where('approved', true);
+                });
+            }
+            if ($filters['status'] === 'pending') {
+                $query->whereHas('listings', function (Builder $builder) {
+                    $builder->where('approved', false);
+                });
+            }
+
         }
     }
 }
