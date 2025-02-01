@@ -16,11 +16,11 @@
                 <button @click="toggleList" class="ms-4 px-2 py-1 bg-green-400 rounded-lg text-white"
                     :class="{ '!bg-red-400': !listShow }">
                     <div v-if="listShow">
-                        <span>Listing</span>
+                        <span>All Listing</span>
                         <i class=" ms-2 fa-solid fa-eye"></i>
                     </div>
                     <div v-else>
-                        <span>Listing</span>
+                        <span> All Listing</span>
                         <i class="ms-2 fa-solid fa-eye-slash"></i>
                     </div>
                 </button>

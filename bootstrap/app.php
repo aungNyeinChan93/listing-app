@@ -2,6 +2,7 @@
 
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\NotSuspendedMiddleware;
+use App\Http\Middleware\TesterMiddleware;
 use Illuminate\Foundation\Application;
 use App\Http\Middleware\HandleInertiaRequests;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -20,6 +21,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'notSuspended'=>NotSuspendedMiddleware::class,
             'admin'=>AdminMiddleware::class,
+            'tester'=>TesterMiddleware::class
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

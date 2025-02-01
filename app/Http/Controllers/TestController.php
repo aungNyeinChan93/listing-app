@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Inertia\Inertia;
 use App\Events\TestEvent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,5 +24,22 @@ class TestController extends Controller
     {
         $req = new UpdateListingRequest();
         dd($req->rules());
+    }
+
+    public function external()
+    {
+        $inertiaJS = 'https://inertiajs.com/';
+        // return redirect()->away($inertiaJS)
+        return Inertia::location($inertiaJS);
+    }
+
+    // custome route
+    public function route(){
+        return Inertia::render('Test/CustomeRoute');
+    }
+
+    // get
+    public function get(Request $request){
+        return $request;
     }
 }

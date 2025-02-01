@@ -29,18 +29,18 @@
                                 class="text-gray-500 transition px-3 py-2 rounded" :href="route('listings.index')">
                             Lisiting </Link>
 
+                            <li v-if="$page.props.isAdmin ">
+                                <p class="text-gray-500 transition hover:text-gray-500/75" > Coming Soon...</p>
+                            </li>
 
-                            <li>
+                            <!-- <li>
                                 <a class="text-gray-500 transition hover:text-gray-500/75" href="#"> Services </a>
                             </li>
 
                             <li>
                                 <a class="text-gray-500 transition hover:text-gray-500/75" href="#"> Projects </a>
-                            </li>
+                            </li> -->
 
-                            <li v-if="$page.props.isAdmin">
-                                <a class="text-gray-500 transition hover:text-gray-500/75" href="#"> Admin </a>
-                            </li>
                         </ul>
 
                     </nav>

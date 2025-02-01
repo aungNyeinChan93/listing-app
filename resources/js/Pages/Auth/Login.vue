@@ -34,8 +34,8 @@ const login = () => {
 
 
                     <MyContainer>
-                        <FlashMessage :message="status" :flash="$page.props.flash" />
-                        <FlashMessage :message="flash.message" :flash="flash" />
+                        <FlashMessage v-if="status" :message="status" :flash="$page.props.flash" />
+                        <FlashMessage v-if="message" :message="flash.message" :flash="flash" />
                         <h1 class="text-center text-xl">Login Form</h1>
                     </MyContainer>
 

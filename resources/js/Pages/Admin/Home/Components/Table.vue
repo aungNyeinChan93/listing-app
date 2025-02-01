@@ -14,8 +14,11 @@
         </div>
 
         <div>
-            <SearchInput label="search" type="text" placeholder="search" :action="action" v-model="form.search" />
+            <Link v-if="params.search" class="badge" :href="route('admins.index', { ...params, search: null })">
+            {{
+                params.search }} <i class="fa-solid fa-xmark ms-1 text-sm"></i></Link>
 
+            <SearchInput label="search" type="text" placeholder="search" :action="action" v-model="form.search" />
         </div>
     </div>
 
@@ -99,12 +102,15 @@
 
 <script setup>
 import { router, useForm } from "@inertiajs/vue3";
-import { watch } from "vue";
 import MyContainer from "../../../Components/MyContainer.vue";
 import Pagination from "../../../Components/Pagination.vue";
 import SearchInput from '../../../Components/SearchInput.vue'
 
 const emit = defineEmits(['message'])
+
+const params = route().params
+console.log(params.search);
+
 
 const props = defineProps({
     listings: {

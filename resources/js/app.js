@@ -17,7 +17,7 @@ createInertiaApp({
         return page;
     },
     setup({ el, App, props, plugin }) {
-        createApp({ render: () => h(App, props) })
+        const app = createApp({ render: () => h(App, props) })
             .use(plugin)
             .use(ZiggyVue)
             .component("Head", Head)
@@ -31,3 +31,4 @@ createInertiaApp({
 });
 
 setThemeOnLoad();
+

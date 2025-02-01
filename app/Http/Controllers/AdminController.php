@@ -19,6 +19,7 @@ class AdminController extends Controller implements HasMiddleware
             new Middleware(['admin', 'auth', 'verified']),
         ];
     }
+
     // index (admins.index)
     public function index(Request $request)
     {
