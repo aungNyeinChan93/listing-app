@@ -52,7 +52,7 @@
                                 class="fa-solid fa-eye"></i></Link>
                             <Link class="text-yellow-400 p-2 ms-2" :href="route('users.lists', user.id)"><i
                                 class="fa-solid fa-pen"></i></Link>
-                            <Link class="text-red-400 p-2 ms-2" :href="route('users.show', user.id)"><i
+                            <Link as="button" method="DELETE" class="text-red-400 p-2 ms-2" :href="route('users.destroy', user.id)"><i
                                 class="fa-solid fa-trash"></i></Link>
                         </td>
                     </tr>

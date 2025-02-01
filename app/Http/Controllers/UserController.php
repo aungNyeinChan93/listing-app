@@ -6,6 +6,7 @@ use App\Models\User;
 use Gate;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
+use Storage;
 
 class UserController extends Controller
 {
@@ -58,15 +59,37 @@ class UserController extends Controller
 
         return Inertia::render("Users/Lists", [
             'listings' => $user->listings()
-                ->when(request('status')== 'approve',function($query){
-                    $query->where('approved',true);
+                ->when(request('status') == 'approve', function ($query) {
+                    $query->where('approved', true);
                 })
-                ->when(request('status')=== 'pending',function ($query){
-                    $query->where('approved',false);
+                ->when(request('status') === 'pending', function ($query) {
+                    $query->where('approved', false);
                 })
                 ->paginate(4)->withQueryString(),
             'user' => $user,
-            'message'=>session('message')
+            'message' => session('message')
         ]);
+    }
+
+    public function destroy(User $user)
+    {
+        // dd($user->listings()->get());
+
+        $images = [];
+        foreach ($user->listings()->get()->toArray() as $key => $listing) {
+            $images[] = $listing['image'];
+            // if ($listing['image']) {
+            //     Storage::disk('public')->delete($listing['images']);
+            // }
+        }
+
+        if ($images) {
+            Storage::disk('public')->delete($images);
+        }
+
+        $user->delete();
+
+        return back()->with('message', 'Delete User Success!');
+
     }
 }

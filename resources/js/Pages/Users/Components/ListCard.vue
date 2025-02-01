@@ -22,9 +22,7 @@
             </p>
         </div>
     </article>
-    <pre>
 
-    </pre>
 </template>
 
 <script setup>

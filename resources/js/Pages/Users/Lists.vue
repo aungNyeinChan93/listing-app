@@ -39,8 +39,6 @@
         <div v-else>
             <MyContainer class="text-2xl !text-red-500 text-center"> <i class="fa-solid fa-hourglass me-2"></i> Empty
                 Listing
-
-
             </MyContainer>
             <button @click="back" class="px-2 py-1 rounded-lg text-sm bg-gray-300"> Back</button>
         </div>
