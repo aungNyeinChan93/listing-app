@@ -82,6 +82,8 @@ class UserController extends Controller
         //     // }
         // }
 
+        Gate::authorize('delete',$user);
+        
         $images = array_map(function ($listing) {
             return $listing['image'];
         }, $user->listings()->get()->toArray());
