@@ -4,7 +4,7 @@
 
     <MyContainer>
 
-        <Title>{{ user.name.toUpperCase() }} LISTINGS</Title>
+        <Title>{{ user.name.toUpperCase() }} LISTINGS ({{ listings?.total }})</Title>
 
         <!-- flash session -->
         <div v-if="flash">
@@ -25,12 +25,12 @@
                     :href="`/users/${user?.id}/lists`" class="btn-primary me-1">ALL</Link>
                 <Link :class="{ '!bg-green-400': $page.url === `/users/${user?.id}/lists?status=approve` }" as="button"
                     :href="route('users.lists', { user: user?.id, search: params.search, status: 'approve' })"
-                    class="btn-primary me-1">Approved List</Link>
+                    class="btn-primary me-1">Approved List <i class="fa-solid fa-thumbs-up ms-2"></i></Link>
                 <Link :class="{ '!bg-green-400': params.status == 'pending' }" as="button"
                     :href="route('users.lists', { user: props.user.id, status: 'pending', search: params.search })"
                     class="btn-primary me-1">
-                Pending
-                List</Link>
+                Pending List<i class="fa-solid fa-clock ms-2"></i>
+                </Link>
             </div>
             <div class="flex justify-evenly items-center  gap-4">
                 <Link v-if="search" class="badge " :href="route('users.lists', { user: user?.id, search: null, })">

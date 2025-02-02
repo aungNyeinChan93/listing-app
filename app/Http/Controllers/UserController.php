@@ -4,12 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Gate;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Storage;
 
-class UserController extends Controller
+class UserController extends Controller implements HasMiddleware
 {
+
+    public static function middleware()
+    {
+        return [
+            new Middleware(['admin'],only:['changeRole','destroy'])
+        ];
+    }
     //index
 
     public function index(Request $request)
@@ -69,7 +78,7 @@ class UserController extends Controller
                 ->paginate(4)->withQueryString(),
             'user' => $user,
             'message' => session('message'),
-            'search'=>$request->search ,
+            'search' => $request->search,
         ]);
     }
 
@@ -84,7 +93,7 @@ class UserController extends Controller
         //     // }
         // }
 
-        Gate::authorize('delete',$user);
+        Gate::authorize('delete', $user);
 
         $images = array_map(function ($listing) {
             return $listing['image'];

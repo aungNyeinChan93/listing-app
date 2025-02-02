@@ -8,10 +8,16 @@ use Illuminate\Auth\Access\Response;
 
 class ListingPolicy
 {
+
+    public function before(User $user)
+    {
+        return $user->role === 'superAdmin' ? true : null;
+    }
+
     /**
      * Determine whether the user can view any models.
      */
-    public function allPending(User $user ): bool
+    public function allPending(User $user): bool
     {
         return $user->role == 'admin';
     }

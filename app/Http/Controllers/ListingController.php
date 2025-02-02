@@ -19,6 +19,7 @@ class ListingController extends Controller implements HasMiddleware
     {
         return [
             new Middleware(['auth', 'verified',], except: []),
+            new Middleware(['admin'],only:['approved','reject'])
         ];
     }
     /**
