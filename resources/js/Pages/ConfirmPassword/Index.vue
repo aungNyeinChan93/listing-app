@@ -2,7 +2,6 @@
 import { useForm } from '@inertiajs/vue3';
 import MyContainer from '../Components/MyContainer.vue';
 import InputField from '../Components/InputField.vue';
-import FlashMessage from '../Components/FlashMessage.vue';
 
 defineProps({
     errors: Object,
@@ -14,6 +13,7 @@ const form = useForm({
 const confirmPassword = () => {
     form.post(route('password.store'), {
         onError: () => form.reset('password'),
+        preserveState:true
     })
 }
 

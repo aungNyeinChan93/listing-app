@@ -17,9 +17,10 @@ const form = useForm({
 
 const register = () => {
     form.post(route('password.update'), {
-        onError: () => form.reset(['email', 'password', 'password_confirmation'])
+        onError: () => form.reset(['email', 'password', 'password_confirmation']),
+        preserveState:true
     }, {
-        preserveState: true
+        // preserveState: true
     })
 }
 

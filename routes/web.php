@@ -58,7 +58,6 @@ Route::middleware(['auth','notSuspended'])->group(function () {
     // admin
     Route::get('admins',[AdminController::class,'index'])->name('admins.index');
 
-
 });
 
 

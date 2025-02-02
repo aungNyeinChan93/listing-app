@@ -65,9 +65,11 @@ class UserController extends Controller
                 ->when(request('status') === 'pending', function ($query) {
                     $query->where('approved', false);
                 })
+                ->filter(request(['search']))
                 ->paginate(4)->withQueryString(),
             'user' => $user,
-            'message' => session('message')
+            'message' => session('message'),
+            'search'=>$request->search ,
         ]);
     }
 
@@ -83,7 +85,7 @@ class UserController extends Controller
         // }
 
         Gate::authorize('delete',$user);
-        
+
         $images = array_map(function ($listing) {
             return $listing['image'];
         }, $user->listings()->get()->toArray());
